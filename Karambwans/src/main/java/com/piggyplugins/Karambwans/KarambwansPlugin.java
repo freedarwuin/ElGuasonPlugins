@@ -49,7 +49,7 @@ import static com.piggyplugins.Karambwans.KarambwansState.*;
 @PluginDescriptor(
         name = "<html><font color=\"#FF9DF9\">[PP]</font> Auto Karambwans</html>",
         enabledByDefault = false,
-        description = "Fishes Karamwbans for you",
+        description = "Fishes Kajambams for you",
         tags = {"ethan", "piggy"}
 )
 @Slf4j
