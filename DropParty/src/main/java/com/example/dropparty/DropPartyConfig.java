@@ -1,4 +1,4 @@
-package org.example.dropparty;
+package com.example.dropparty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

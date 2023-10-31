@@ -1,4 +1,4 @@
-package org.example.dropparty;
+package com.example.dropparty;
 
 import com.google.inject.Provides;
 import lombok.AccessLevel;
