@@ -153,6 +153,25 @@ public class NPCQuery {
         return this;
     }
 
+    public NPCQuery withinBounds(WorldPoint min, WorldPoint max) {
+        npcs = npcs.stream().filter(npc -> {
+            int x1 = min.getX();
+            int x2 = max.getX();
+            int y1 = min.getY();
+            int y2 = max.getY();
+
+            int x3 = npc.getWorldLocation().getX();
+            int y3 = npc.getWorldLocation().getY();
+
+            if (x3 > Math.max(x1, x2) || x3 < Math.min(x1, x2)) {
+                return false;
+            }
+
+            return y3 <= Math.max(y1, y2) && y3 >= Math.min(y1, y2);
+        }).collect(Collectors.toList());
+        return this;
+    }
+
     public Optional<NPC> nearestToPlayer() {
         if (npcs.size() == 0) {
             return Optional.ofNullable(null);
@@ -166,6 +185,8 @@ public class NPCQuery {
         }
         return npcs.stream().min(Comparator.comparingInt(npc -> npc.getWorldLocation().distanceTo(point)));
     }
+
+
 
     public Optional<NPC> first() {
         if (npcs.size() == 0) {
