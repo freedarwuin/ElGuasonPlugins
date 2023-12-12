@@ -72,12 +72,14 @@ public class LavaRunecrafterPlugin extends Plugin {
         timeout = 0;
         pouches = new HashMap<>();
         breakHandler.registerPlugin(this);
+        breakHandler.startPlugin(this);
     }
 
     @Override
     public void shutDown() {
         timeout = 0;
         pouches = new HashMap<>();
+        breakHandler.stopPlugin(this);
         breakHandler.unregisterPlugin(this);
     }
 
