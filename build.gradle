@@ -46,8 +46,14 @@ dependencies {
     compileOnly project(path: ':AutoTitheFarm')
     testImplementation project(path: ':AutoTitheFarm')
 
-//    compileOnly project(path: ':AutoMLM')
-//    testImplementation project(path: ':AutoMLM')
+    compileOnly project(path: ':AutoMLM')
+    testImplementation project(path: ':AutoMLM')
+
+    compileOnly project(path: ':AutoNMZ')
+    testImplementation project(path: ':AutoNMZ')
+
+    compileOnly project(path: ':AutoShopper')
+    testImplementation project(path: ':AutoShopper')
 
     compileOnly project(path: ':AutoSmith')
     testImplementation project(path: ':AutoSmith')

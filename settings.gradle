@@ -44,4 +44,7 @@ include 'AutoChompy'
 include 'AutoTrapper'
 include 'AutoWintertodt'
 include 'AutoRuneDragons'
+include 'AutoMLM'
+include 'AutoNMZ'
+include 'AutoShopper'
 
