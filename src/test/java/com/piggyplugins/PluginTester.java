@@ -5,6 +5,7 @@ import com.example.PacketUtils.PacketUtilsPlugin;
 import com.example.UpkeepPlugin.UpkeepPlugin;
 import com.piggyplugins.AutoAerial.AutoAerialPlugin;
 import com.piggyplugins.CannonReloader.CannonReloaderPlugin;
+import com.piggyplugins.ChinBreakHandler.ChinBreakHandlerPlugin;
 import com.piggyplugins.Firemaking.FiremakingPlugin;
 import com.piggyplugins.OneTickSwitcher.PvpHelperPlugin;
 import com.piggyplugins.PiggyUtils.PiggyUtilsPlugin;
@@ -29,7 +30,7 @@ public class PluginTester {
                 ButterflyPlugin.class, FiremakingPlugin.class, DialogueContinuerPlugin.class,
                 KittenFeederPlugin.class, AutoChompyPlugin.class, PowerSkillerPlugin.class, AutoTrapperPlugin.class,
                 SpeedDartMakerPlugin.class, RooftopAgilityPlugin.class, UpkeepPlugin.class, PvpHelperPlugin.class,
-                CannonReloaderPlugin.class, AutoVorkathPlugin.class, PiggyUtilsPlugin.class);
+                CannonReloaderPlugin.class, AutoVorkathPlugin.class, PiggyUtilsPlugin.class, ChinBreakHandlerPlugin.class);
         RuneLite.main(args);
     }
 }
