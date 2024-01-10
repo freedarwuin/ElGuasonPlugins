@@ -563,7 +563,6 @@ class AutoVorkathPlugin : Plugin() {
 
     private fun fightingState() {
         if (runIsOff()) enableRun()
-        acidPools.clear()
         if (!inVorkathArea()) {
             changeStateTo(State.THINKING)
             return
