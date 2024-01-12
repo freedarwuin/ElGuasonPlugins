@@ -49,5 +49,6 @@ include 'AutoChompy'
 include 'AutoTrapper'
 include 'AutoWintertodt'
 include 'AutoRuneDragons'
+include 'AutoTitheFarm'
 include 'AutoVorkath'
 
