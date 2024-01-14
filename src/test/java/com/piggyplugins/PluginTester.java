@@ -5,7 +5,7 @@ import com.example.PacketUtils.PacketUtilsPlugin;
 import com.example.UpkeepPlugin.UpkeepPlugin;
 import com.piggyplugins.AutoAerial.AutoAerialPlugin;
 import com.piggyplugins.CannonReloader.CannonReloaderPlugin;
-import com.piggyplugins.ChinBreakHandler.ChinBreakHandlerPlugin;
+import net.runelite.client.plugins.ChinBreakHandler.ChinBreakHandlerPlugin;
 import com.piggyplugins.Firemaking.FiremakingPlugin;
 import com.piggyplugins.OneTickSwitcher.PvpHelperPlugin;
 import com.piggyplugins.PiggyUtils.PiggyUtilsPlugin;
