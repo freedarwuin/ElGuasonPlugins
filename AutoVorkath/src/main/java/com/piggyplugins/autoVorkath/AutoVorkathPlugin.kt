@@ -341,6 +341,11 @@ class AutoVorkathPlugin : Plugin() {
                         NPCInteraction.interact(banker, "Bank")
                     }
                     changeStateTo(State.GETTING_ITEM, 1)
+                } else {
+                    NPCs.search().nameContains("Banker").nearestToPlayer().ifPresent { banker ->
+                        NPCInteraction.interact(banker, "Bank")
+                    }
+                    changeStateTo(State.GETTING_ITEM, 1)
                 }
             }
         }
