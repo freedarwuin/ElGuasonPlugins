@@ -31,8 +31,8 @@ import kotlin.math.abs
 
 @PluginDescriptor(
     name = "<html><font color=\"#9ddbff\">[JR]</font> Auto Vorkath </html>",
-    description = "JR - Auto Vorkath",
-    tags = ["vorkath", "auto", "auto prayer", "mule", "trade"],
+    description = "JR - Auto vorkath",
+    tags = ["vorkath", "auto", "auto prayer"],
     enabledByDefault = false
 )
 class AutoVorkathPlugin : Plugin() {
@@ -59,7 +59,7 @@ class AutoVorkathPlugin : Plugin() {
         return configManager.getConfig(AutoVorkathConfig::class.java)
     }
 
-    var botState: State? = null
+    var botState: State = State.NONE
     var tickDelay: Int = 0
     var killCount: Int = 0
     private var running = false
@@ -122,7 +122,7 @@ class AutoVorkathPlugin : Plugin() {
     override fun shutDown() {
         println("Auto Vorkath Plugin Deactivated")
         running = false
-        botState = null
+        botState = State.NONE
         drankAntiFire = false
         drankRangePotion = false
         lastDrankAntiFire = 0
@@ -238,7 +238,6 @@ class AutoVorkathPlugin : Plugin() {
                 State.SELLING -> sellingItemState()
                 State.MULING -> mulingState()
                 State.NONE -> println("None State")
-                null -> println("Null State")
             }
         }
     }
@@ -467,7 +466,7 @@ class AutoVorkathPlugin : Plugin() {
 
     private fun acidState() {
         if (!runIsOff()) enableRun()
-        activatePrayers(false)
+        PrayerInteraction.setPrayerState(Prayer.PROTECT_FROM_MAGIC, false)
         if (!inVorkathArea()) {
             acidPools.clear()
             changeStateTo(State.THINKING)
@@ -563,6 +562,7 @@ class AutoVorkathPlugin : Plugin() {
 
     private fun fightingState() {
         if (runIsOff()) enableRun()
+        acidPools.clear()
         if (!inVorkathArea()) {
             changeStateTo(State.THINKING)
             return
@@ -585,6 +585,7 @@ class AutoVorkathPlugin : Plugin() {
                     MovementPackets.queueMovement(middle)
                 }
             }
+            drinkAntiVenom()
             eat(config.EATAT())
             if (Inventory.search().nameContains(config.CROSSBOW().toString()).result().isNotEmpty()) {
                 InventoryInteraction.useItem(config.CROSSBOW().toString(), "Wield")
@@ -764,14 +765,8 @@ class AutoVorkathPlugin : Plugin() {
             }
             return
         }
-
         drinkPrayer()
-
-        if (Equipment.search().nameContains("Serpentine helm").result().isEmpty()) {
-            Inventory.search().nameContains("Anti-venom").first().ifPresent {
-                InventoryInteraction.useItem("Anti-venom", "Drink")
-            }
-        }
+        drinkAntiVenom()
         isPrepared = drankAntiFire && drankRangePotion && !inventoryHasLoot()
         if (isPrepared) {
             changeStateTo(State.THINKING)
@@ -779,6 +774,16 @@ class AutoVorkathPlugin : Plugin() {
         } else {
             changeStateTo(State.WALKING_TO_BANK)
             return
+        }
+    }
+
+    private fun drinkAntiVenom() {
+        if (Equipment.search().nameContains("Serpentine helm").result().isEmpty()) {
+            if (client.getVarbitValue(VarPlayer.POISON) >= -38) {
+                Inventory.search().nameContains("Anti-venom").first().ifPresent {
+                    InventoryInteraction.useItem(it, "Drink")
+                }
+            }
         }
     }
 
