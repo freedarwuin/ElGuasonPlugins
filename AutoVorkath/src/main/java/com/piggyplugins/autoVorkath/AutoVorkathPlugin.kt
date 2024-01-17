@@ -456,7 +456,7 @@ class AutoVorkathPlugin : Plugin() {
                 InventoryInteraction.useItem(bolts, "Wield")
             }
         }
-        lootQueue.forEach {
+        lootQueue.first().let {
             if (!isMoving()) {
                 if (!Inventory.full()) {
                     TileItems.search().withId(it.id).first().ifPresent { item ->
@@ -468,7 +468,8 @@ class AutoVorkathPlugin : Plugin() {
                 } else {
                     EthanApiPlugin.sendClientMessage("Inventory full, going to bank.")
                     lootQueue.clear()
-                    changeStateTo(State.WALKING_TO_BANK)
+                    if (killCount % config.SELLAT() == 0 && killCount != 0) changeStateTo(State.WALKING_TO_GE)
+                    else changeStateTo(State.WALKING_TO_BANK, 1)
                     return
                 }
             }
@@ -843,14 +844,14 @@ class AutoVorkathPlugin : Plugin() {
         if (!hasItem(config.TELEPORT().toString())) {
             withdraw(config.TELEPORT().toString(), 1)
         }
-        if (BankInventory.search().nameContains(config.RANGEPOTION().toString()).result().size <= 1) {
-            withdraw(config.RANGEPOTION().toString(), 1)
+        if (BankInventory.search().nameContains(config.PRAYERPOTION().toString()).result().size <= 1) {
+            withdraw(config.PRAYERPOTION().toString(), 1)
         }
         if (!hasItem(config.SLAYERSTAFF().toString())) {
             withdraw(config.SLAYERSTAFF().toString(), 1)
         }
-        if (BankInventory.search().nameContains(config.PRAYERPOTION().toString()).result().size <= 1) {
-            withdraw(config.PRAYERPOTION().toString(), 1)
+        if (BankInventory.search().nameContains(config.RANGEPOTION().toString()).result().size <= 1) {
+            withdraw(config.RANGEPOTION().toString(), 1)
         }
         if (!hasItem("Rune pouch")) {
             withdraw("Rune pouch", 1)
