@@ -69,6 +69,25 @@ public class SuppliesUtil {
         return potion.orElse(null);
     }
 
+
+    public Widget findSuperStrengthPotion() {
+        Optional<Widget> potion = Inventory.search().onlyUnnoted().withAction("Drink").nameContains("Super strength").first();
+        return potion.orElse(null);
+    }
+    public Widget findAntiPoisonPotion() {
+        Optional<Widget> potion = Inventory.search().onlyUnnoted().withAction("Drink").nameContains("tipoison").first();
+        return potion.orElse(null);
+    }
+
+    public Widget findSuperAttackPotion() {
+        Optional<Widget> potion = Inventory.search().onlyUnnoted().withAction("Drink").nameContains("Super attack").first();
+        return potion.orElse(null);
+    }
+    public Widget findSuperDefencePotion() {
+        Optional<Widget> potion = Inventory.search().onlyUnnoted().withAction("Drink").nameContains("Super defence").first();
+        return potion.orElse(null);
+    }
+
     /**
      * Finds any unnoted Strength Potion in the inventory
      *

@@ -13,12 +13,15 @@ import com.google.inject.Provides;
 import com.piggyplugins.PiggyUtils.API.PlayerUtil;
 import com.polyplugins.AutoCombat.helper.LootHelper;
 import com.polyplugins.AutoCombat.helper.SlayerHelper;
+import com.polyplugins.AutoCombat.util.LogLevel;
+import com.polyplugins.AutoCombat.util.PotionType;
 import com.polyplugins.AutoCombat.util.SuppliesUtil;
 import com.polyplugins.AutoCombat.util.Util;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -33,6 +36,8 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.HotkeyListener;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 
 @PluginDescriptor(
         name = "<html><font color=\"#7ecbf2\">[PJ]</font>AutoCombat</html>",
@@ -83,6 +88,10 @@ public class AutoCombatPlugin extends Plugin {
     private boolean hasFood = false;
     private boolean hasPrayerPot = false;
     private boolean hasCombatPot = false;
+    private boolean hasSuperAttackPot = false;
+    private boolean hasSuperDefencePot = false;
+    private boolean hasSuperStrengthPot = false;
+    private boolean hasAntiPoisonPot = false;
     private boolean hasBones = false;
     public boolean isSlayerNpc = false;
     public SlayerNpc slayerInfo = null;
@@ -94,18 +103,17 @@ public class AutoCombatPlugin extends Plugin {
     @Override
     protected void startUp() throws Exception {
         keyManager.registerKeyListener(toggle);
-        overlayManager.add(overlay);
-        overlayManager.add(tileOverlay);
         timeout = 0;
     }
+
 
     @Override
     protected void shutDown() throws Exception {
         keyManager.unregisterKeyListener(toggle);
-        overlayManager.remove(overlay);
-        overlayManager.remove(tileOverlay);
+        removeOverlay();
         resetEverything();
     }
+
 
     public void resetEverything() {
         timeout = 0;
@@ -150,25 +158,20 @@ public class AutoCombatPlugin extends Plugin {
             return;
         }
 
+        if (client.getVarpValue(VarPlayer.POISON) > 0 && config.useAntiPoison()) {
+            handleAntiPoison();
+        }
 
-        Inventory.search().onlyUnnoted().withAction("Bury").filter(b -> config.buryBones()).first().ifPresent(bone -> {
-            MousePackets.queueClickPacket();
-            WidgetPackets.queueWidgetAction(bone, "Bury");
-            timeout = 1;
-        });
-        Inventory.search().onlyUnnoted().withAction("Scatter").filter(b -> config.buryBones()).first().ifPresent(bone -> {
-            MousePackets.queueClickPacket();
-            WidgetPackets.queueWidgetAction(bone, "Scatter");
-            timeout = 1;
-        });
+
+        processBoneAction("Bury");
+
+        processBoneAction("Scatter");
 
 //        if (lootQueue.isEmpty()) looting = false;
         if (lootTile == null) looting = false;
         checkRunEnergy();
-        hasFood = supplies.findFood() != null;
-        hasPrayerPot = supplies.findPrayerPotion() != null;
-        hasCombatPot = supplies.findCombatPotion() != null;
-        hasBones = supplies.findBone() != null;
+        setupPotionsAndFoodVariables();
+
 
 //        if (lootTile != null) {
 //            looting = true;
@@ -242,6 +245,21 @@ public class AutoCombatPlugin extends Plugin {
             lootQueue.remove();
             return;
         }
+
+
+        if (config.useGuthan()) {
+            int currentHpRatio = util.getHpPercentValue(client.getLocalPlayer().getHealthRatio(), client.getLocalPlayer().getHealthScale());
+
+            if (currentHpRatio <= config.hitpointsThreshold()) {
+                util.equipGuthans();
+            } else if ((currentHpRatio >= config.minHitpointsThreshold() && util.defaultGearNotEquipped()) ||
+                    (currentHpRatio > config.hitpointsThreshold() && currentHpRatio < config.minHitpointsThreshold() &&
+                            util.getNumberOfEquipedGuthanPieces() >= 1 && util.getNumberOfEquipedGuthanPieces() < 4)) {
+                util.equipDefaultEquipment();
+            }
+        }
+
+
 //        if (lootTile != null) lootTile = null;
         if (playerUtil.isInteracting() || looting) {
             timeout = 3;
@@ -268,56 +286,150 @@ public class AutoCombatPlugin extends Plugin {
         }
     }
 
+    private void setupPotionsAndFoodVariables() {
+        hasFood = util.hasItem(supplies, supplies::findFood);
+        hasPrayerPot = util.hasItem(supplies, supplies::findPrayerPotion);
+        hasCombatPot = util.hasItem(supplies, supplies::findCombatPotion);
+        hasSuperAttackPot = util.hasItem(supplies, supplies::findSuperAttackPotion);
+        hasSuperDefencePot = util.hasItem(supplies, supplies::findSuperDefencePotion);
+        hasSuperStrengthPot = util.hasItem(supplies, supplies::findSuperStrengthPotion);
+        hasAntiPoisonPot = util.hasItem(supplies, supplies::findAntiPoisonPotion);
+        hasBones = util.hasItem(supplies, supplies::findBone);
+    }
+
     private void handleFullInventory() {
 
     }
 
     private void handleRangingPot() {
-        if (hasCombatPot) {
-            InventoryInteraction.useItem(supplies.findRangingPotion(), "Drink");
-//            timeout = 1;
-        }
+        handlePotion(PotionType.RANGING);
     }
 
     private void handleCombatPot() {
-        if (hasCombatPot) {
-            InventoryInteraction.useItem(supplies.findCombatPotion(), "Drink");
-//            timeout = 1;
-        }
+        handlePotion(PotionType.COMBAT);
+    }
+
+    private void handleSuperAttack() {
+        handlePotion(PotionType.SUPER_ATTACK);
+    }
+
+    private void handleSuperDefence() {
+        handlePotion(PotionType.SUPER_DEFENCE);
+    }
+
+    private void handleSuperStrength() {
+        handlePotion(PotionType.SUPER_STRENGTH);
     }
 
     private void handlePrayerPot() {
-        if (hasPrayerPot) {
-            InventoryInteraction.useItem(supplies.findPrayerPotion(), "Drink");
-//            timeout = 1;
-        }
+        handlePotion(PotionType.PRAYER);
+    }
+
+    public void handleAntiPoison() {
+        handlePotion(PotionType.ANTIPOISON, 2);
     }
 
     private void handleEating() {
-        if (hasFood) {
-            InventoryInteraction.useItem(supplies.findFood(), "Eat");
-            timeout = 1;
+        handlePotion(PotionType.EAT, 1);
+    }
+
+
+    private void handlePotion(PotionType potionType) {
+        handlePotion(potionType, 0);
+    }
+
+    private void handlePotion(PotionType potionType, int timeoutTime) {
+        Supplier<Widget> potionSupplier = null;
+
+        switch (potionType) {
+            case COMBAT:
+                if (hasCombatPot) potionSupplier = supplies::findCombatPotion;
+                break;
+            case SUPER_ATTACK:
+                if (hasSuperAttackPot) potionSupplier = supplies::findSuperAttackPotion;
+                break;
+            case SUPER_DEFENCE:
+                if (hasSuperDefencePot) potionSupplier = supplies::findSuperDefencePotion;
+                break;
+            case SUPER_STRENGTH:
+                if (hasSuperStrengthPot) potionSupplier = supplies::findSuperStrengthPotion;
+                break;
+            case PRAYER:
+                if (hasPrayerPot) potionSupplier = supplies::findPrayerPotion;
+                break;
+            case RANGING:
+                if (hasCombatPot) potionSupplier = supplies::findRangingPotion;
+                break;
+            case ANTIPOISON:
+                if (hasAntiPoisonPot) potionSupplier = supplies::findAntiPoisonPotion;
+                break;
+            case EAT:
+                if (hasFood) potionSupplier = supplies::findFood;
+                break;
+        }
+
+        if (potionSupplier != null) {
+            InventoryInteraction.useItem(potionSupplier.get(), potionType == PotionType.EAT ? "Eat" : "Drink");
+        }
+
+        if (timeoutTime >= 1) {
+            timeout = timeoutTime;
         }
     }
+
+
+    private void checkAndHandleCombatSkillPotions(Skill skill, Runnable handler) {
+        double realSkillLevel = client.getRealSkillLevel(skill);
+        double boostedSkillLevel = util.calculateBoostedSkillLevel(realSkillLevel);
+        double currentBoostedSkill = client.getBoostedSkillLevel(skill);
+        double initialBoost = boostedSkillLevel - realSkillLevel;
+        double currentBoostRemaining = currentBoostedSkill - realSkillLevel;
+        double finalBoost = Math.round((currentBoostRemaining / initialBoost) * 100);
+
+
+        if (config.enableDebug()) {
+            System.out.println("==================START===========================");
+            System.out.println("Debug: Skill: " + skill.getName() + " - Stats");
+            System.out.println("Boosted Skill Level: " + boostedSkillLevel);
+            System.out.println("Current Boosted Skill Level: " + currentBoostedSkill);
+            System.out.println("Real Skill Level: " + realSkillLevel);
+            System.out.println("Result (Final Boost): " + finalBoost);
+            System.out.println("==================END============================");
+        }
+
+
+        if (currentBoostedSkill == realSkillLevel || finalBoost <= config.useCombatPotAt()) {
+            handler.run();
+        }
+    }
+
 
     @Subscribe
     public void onNpcLootReceived(NpcLootReceived event) {
         if (!started || !config.lootEnabled()) return;
+
+        timeout += ThreadLocalRandom.current().nextInt(config.minLootDelay(), config.maxLootDelay());
         Collection<ItemStack> items = event.getItems();
+        List<String> lootNames = lootHelper.getLootNames();
+        List<Integer> lootIds = lootHelper.getLootIds();
+
         items.stream().filter(item -> {
             ItemComposition comp = itemManager.getItemComposition(item.getId());
-            return lootHelper.getLootNames().contains(comp.getName());
+            String itemName = comp.getName().toLowerCase();
+            boolean nameMatch = util.isNameMatch(lootNames, itemName);
+            boolean idMatch = util.isIdMatch(lootIds, comp.getId());
+            return (nameMatch || idMatch) || lootHelper.getPrice(itemName) >= config.minLootWealth();
         }).forEach(it -> {
-            log.info("Adding to lootQueue: " + it.getId());
+            util.sendDebugMessageIntoGameChat("Adding to lootQueue: " + it.getId());
             lootQueue.add(it);
         });
     }
+
 
     @Subscribe
     public void onStatChanged(StatChanged event) {
         if (!started) return;
         if (client.getBoostedSkillLevel(Skill.HITPOINTS) <= config.eatAt()) {
-//            log.info("should eat");
             handleEating();
         }
         if (config.usePrayerPotion()) {
@@ -325,10 +437,14 @@ public class AutoCombatPlugin extends Plugin {
                 handlePrayerPot();
             }
         }
-        if (config.useCombatPotion()) {
+        if (config.useCombatPotion() && hasCombatPot) {
             if (client.getBoostedSkillLevel(Skill.STRENGTH) <= config.useCombatPotAt()) {
                 handleCombatPot();
             }
+        } else if (config.useCombatPotion() && !hasCombatPot) {
+            checkAndHandleCombatSkillPotions(Skill.ATTACK, this::handleSuperAttack);
+            checkAndHandleCombatSkillPotions(Skill.STRENGTH, this::handleSuperStrength);
+            checkAndHandleCombatSkillPotions(Skill.DEFENCE, this::handleSuperDefence);
         }
         if (config.useRangingPotion()) {
             if (client.getBoostedSkillLevel(Skill.RANGED) <= config.useRangingPotAt()) {
@@ -336,6 +452,7 @@ public class AutoCombatPlugin extends Plugin {
             }
         }
     }
+
 
     @Subscribe
     public void onChatMessage(ChatMessage event) {
@@ -351,10 +468,16 @@ public class AutoCombatPlugin extends Plugin {
         if (pid == VarPlayer.SLAYER_TASK_SIZE) {
             if (event.getValue() <= 0) {
                 if (config.breakTab()) {
-                    InventoryInteraction.useItem(supplies.findTeleport(), "Break");
+                    Optional<Widget> item = Inventory.search().withId(11140).first();
+                    if (item.isPresent()) {
+                        MousePackets.queueClickPacket();
+                        InventoryInteraction.useItem(item.get(), "Gem Mine");
+                    } else {
+                        InventoryInteraction.useItem(supplies.findTeleport(), "Break");
+                    }
                 }
                 if (config.shutdownOnTaskDone()) {
-                    EthanApiPlugin.sendClientMessage("Task done, stopping");
+                    util.sendDebugMessageIntoGameChat("Task done, stopping", LogLevel.INFO);
                     resetEverything();
                 }
             }
@@ -374,6 +497,11 @@ public class AutoCombatPlugin extends Plugin {
         if (event.getKey().equals("lootNames")) {
             lootHelper.setLootNames(null);
             lootHelper.getLootNames();
+        }
+
+        if (event.getKey().equals("lootIds")) {
+            lootHelper.setLootIds(null);
+            lootHelper.getLootIds();
         }
     }
 
@@ -409,6 +537,21 @@ public class AutoCombatPlugin extends Plugin {
 //        }
 //    }
 
+
+    private void processBoneAction(String action) {
+        Inventory.search()
+                .onlyUnnoted()
+                .withAction(action)
+                .filter(b -> config.buryBones())
+                .first()
+                .ifPresent(bone -> {
+                    MousePackets.queueClickPacket();
+                    WidgetPackets.queueWidgetAction(bone, action);
+                    timeout = 1;
+                });
+    }
+
+
     private final HotkeyListener toggle = new HotkeyListener(() -> config.toggle()) {
         @Override
         public void hotkeyPressed() {
@@ -417,9 +560,24 @@ public class AutoCombatPlugin extends Plugin {
     };
 
     public void toggle() {
-        if (client.getGameState() != GameState.LOGGED_IN) {
-            return;
+        if (client.getGameState() == GameState.LOGGED_IN) {
+            started = !started;
+            if (started) {
+                addOverlay();
+            } else {
+                removeOverlay();
+            }
         }
-        started = !started;
     }
+
+    private void addOverlay() {
+        overlayManager.add(overlay);
+        overlayManager.add(tileOverlay);
+    }
+
+    private void removeOverlay() {
+        overlayManager.remove(overlay);
+        overlayManager.remove(tileOverlay);
+    }
+
 }

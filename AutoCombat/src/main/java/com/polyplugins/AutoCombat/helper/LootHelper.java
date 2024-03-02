@@ -39,6 +39,8 @@ public class LootHelper {
 
     @Setter
     private List<String> lootNames = null;
+    @Setter
+    private List<Integer> lootIds = null;
 
 
     /**
@@ -68,18 +70,27 @@ public class LootHelper {
     }
 
     /**
+     * Takes the loot ids and returns as a list with trimmed names
+     *
+     * @return
+     */
+    public List<Integer> getLootIds() {
+        lootIds = Arrays.stream(config.lootIds().split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        return lootIds;
+    }
+
+
+    /**
      * Gets the cached price or wiki price if not yet cached
      *
      * @param name Exact name of item
      * @return
      */
     public int getPrice(String name) {
-        if (lootCache.containsKey(name)) {
-            return lootCache.get(name);
-        }
-        int price = itemManager.search(name).get(0).getWikiPrice();
-        lootCache.put(name, price);
-        return price;
+        return lootCache.computeIfAbsent(name, key -> itemManager.search(key).get(0).getWikiPrice());
     }
 
 }

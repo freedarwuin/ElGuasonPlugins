@@ -53,7 +53,7 @@ public interface AutoCombatConfig extends Config {
     @ConfigItem(
             keyName = "useCombatAt",
             name = "Use at",
-            description = "What level to use combat potions at",
+            description = "Use combat at skill level or super set drops below a certain percentage",
             position = -9,
             section = autoCombatConfig
     )
@@ -129,23 +129,6 @@ public interface AutoCombatConfig extends Config {
         return 50;
     }
 
-    @ConfigItem(keyName = "shutdownOnTaskDone",
-            name = "Stop when task done?",
-            description = "Teleports away and stops. Untick if you have no task or want to stay",
-            position = 8,
-            section = autoCombatConfig)
-    default boolean shutdownOnTaskDone() {
-        return false;
-    }
-
-    @ConfigItem(keyName = "breakTab",
-            name = "Break Tab on Task Done?",
-            description = "Break any teleport tablet when task completes",
-            position = 10,
-            section = autoCombatConfig)
-    default boolean breakTab() {
-        return false;
-    }
 
     @ConfigItem(keyName = "buryBones",
             name = "Bury bones/ashes",
@@ -155,6 +138,16 @@ public interface AutoCombatConfig extends Config {
     default boolean buryBones() {
         return false;
     }
+
+    @ConfigItem(keyName = "useAntiPoison",
+            name = "Use anti-poison",
+            description = "Use antipoison if poisoned",
+            position = 11,
+            section = autoCombatConfig)
+    default boolean useAntiPoison() {
+        return false;
+    }
+
 
     @ConfigSection(
             name = "Looting Configuration",
@@ -184,6 +177,159 @@ public interface AutoCombatConfig extends Config {
     )
     default String lootNames() {
         return "Feather";
+    }
+
+    @ConfigItem(
+            keyName = "lootIds",
+            name = "Item IDs to loot",
+            description = "",
+            position = 4,
+            section = lootingConfig
+    )
+    default String lootIds() {
+        return "995";
+    }
+
+    @ConfigItem(
+            keyName = "minLootWealth",
+            name = "Loot items with value of",
+            description = "Loot items that possess a minimum wealth threshold.",
+            position = 5,
+            section = lootingConfig
+    )
+    default int minLootWealth() {
+        return 10000;
+    }
+
+    @Range(
+            min = 1,
+            max = 10
+    )
+    @ConfigItem(
+            keyName = "minLootDelay",
+            name = "Min Loot delay",
+            description = "Loot delay for death Animation. 1 game tick equates to roughly 600ms",
+            position = 6,
+            section = lootingConfig
+    )
+    default int minLootDelay() {
+        return 2;
+    }
+
+    @Range(
+            min = 1,
+            max = 10
+    )
+    @ConfigItem(
+            keyName = "maxLootDelay",
+            name = "Max Loot delay",
+            description = "Loot delay for death Animation. 1 game tick equates to roughly 600ms",
+            position = 7,
+            section = lootingConfig
+    )
+    default int maxLootDelay() {
+        return 4;
+    }
+
+
+    @ConfigSection(
+            name = "Slayer Section",
+            description = "",
+            position = 20
+    )
+    String slayerSection = "slayerTitle";
+
+    @ConfigItem(
+            keyName = "useGuthan",
+            name = "Use Guthans?",
+            description = "",
+            position = 21,
+            section = slayerSection
+    )
+    default boolean useGuthan() {
+        return false;
+    }
+
+
+    @Range(
+            min = 2,
+            max = 90
+    )
+    @ConfigItem(
+            keyName = "hitpointsThreshold",
+            name = "HP Threshold in %",
+            description = "",
+            position = 22,
+            section = slayerSection
+    )
+    default int hitpointsThreshold() {
+        return 40;
+    }
+
+    @Range(
+            min = 2,
+            max = 90
+    )
+    @ConfigItem(
+            keyName = "minHitpointsThreshold",
+            name = "Min HP% for Default",
+            description = "Min HP% for Default Gear",
+            position = 23,
+            section = slayerSection
+    )
+    default int minHitpointsThreshold() {
+        return 80;
+    }
+
+    @ConfigItem(
+            keyName = "defaultGear",
+            name = "Default Gear to equip",
+            description = "",
+            position = 24,
+            section = slayerSection
+    )
+    default String defaultGear() {
+        return "4151,12954,1127,1079,11865";
+    }
+
+    @ConfigItem(
+            keyName = "gearPerTick",
+            name = "Gear To Equip per tick",
+            description = "Gear To Equip per tick",
+            position = 25,
+            section = slayerSection
+    )
+    default int gearPerTick() {
+        return 2;
+    }
+
+    @ConfigItem(keyName = "shutdownOnTaskDone",
+            name = "Stop when task done?",
+            description = "Teleports away and stops. Untick if you have no task or want to stay",
+            position = 34,
+            section = slayerSection)
+    default boolean shutdownOnTaskDone() {
+        return false;
+    }
+
+    @ConfigItem(keyName = "breakTab",
+            name = "Gloves / Tab on Task Done?",
+            description = "Use Karamja Gloves 3 or Break any teleport tablet when task completes",
+            position = 45,
+            section = slayerSection)
+    default boolean breakTab() {
+        return false;
+    }
+
+
+    @ConfigItem(
+            keyName = "enableDebug",
+            name = "Enable Debug?",
+            description = "",
+            position = 100
+    )
+    default boolean enableDebug() {
+        return false;
     }
 }
 
