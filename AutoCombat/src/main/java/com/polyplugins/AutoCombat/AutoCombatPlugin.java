@@ -418,7 +418,20 @@ public class AutoCombatPlugin extends Plugin {
             String itemName = comp.getName().toLowerCase();
             boolean nameMatch = util.isNameMatch(lootNames, itemName);
             boolean idMatch = util.isIdMatch(lootIds, comp.getId());
-            return (nameMatch || idMatch) || lootHelper.getPrice(itemName) >= config.minLootWealth();
+            boolean priceMatch = config.minLootWealth() != 0 && lootHelper.getPrice(item.getId()) >= config.minLootWealth();
+
+            if (config.enableDebug()) {
+                System.out.println("==================START===========================");
+                System.out.println("Debug: Loot Received - Stats");
+                System.out.println("Item Name: " + itemName);
+                System.out.println("Item ID: " + comp.getId());
+                System.out.println("Item Price: " + lootHelper.getPrice(item.getId()));
+                System.out.println("Name Match: " + nameMatch);
+                System.out.println("ID Match: " + idMatch);
+                System.out.println("Price Match: " + priceMatch);
+                System.out.println("==================END============================");
+            }
+            return (nameMatch || idMatch) || priceMatch;
         }).forEach(it -> {
             util.sendDebugMessageIntoGameChat("Adding to lootQueue: " + it.getId());
             lootQueue.add(it);

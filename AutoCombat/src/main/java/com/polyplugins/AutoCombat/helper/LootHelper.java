@@ -93,4 +93,10 @@ public class LootHelper {
         return lootCache.computeIfAbsent(name, key -> itemManager.search(key).get(0).getWikiPrice());
     }
 
+    public int getPrice(int itemId) {
+        ItemComposition itemComposition =  itemManager.getItemComposition(itemId);
+        return lootCache.computeIfAbsent(itemComposition.getName(), key -> itemComposition.getPrice());
+    }
+
+
 }
