@@ -305,7 +305,7 @@ public class PowerSkillerPlugin extends Plugin {
     }
 
     public void toggle() {
-        if (client.getGameState() != GameState.LOGGED_IN || !EthanApiPlugin.loggedIn()) {
+        if (!EthanApiPlugin.loggedIn()) {
             return;
         }
         started = !started;
