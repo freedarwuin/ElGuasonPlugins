@@ -104,6 +104,13 @@ public class ItemCombinerPlugin extends Plugin {
             isMaking = false;
         }
 
+        if(client.getLocalPlayer().getAnimation() == -1 && isMaking){
+                afkTicks++;
+        }
+        if(afkTicks >= 25){
+                isMaking = false;
+        }
+
         if (isMaking) {
             return;
         }
