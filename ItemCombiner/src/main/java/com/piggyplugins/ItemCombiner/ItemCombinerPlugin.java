@@ -1,11 +1,6 @@
 package com.piggyplugins.ItemCombiner;
 
-import com.example.EthanApiPlugin.Collections.Bank;
-import com.example.EthanApiPlugin.Collections.BankInventory;
-import com.example.EthanApiPlugin.Collections.Inventory;
-import com.example.EthanApiPlugin.Collections.NPCs;
-import com.example.EthanApiPlugin.Collections.TileObjects;
-import com.example.EthanApiPlugin.Collections.query.TileObjectQuery;
+import com.example.EthanApiPlugin.Collections.*;
 import com.example.EthanApiPlugin.EthanApiPlugin;
 import com.example.InteractionApi.BankInteraction;
 import com.example.InteractionApi.NPCInteraction;
@@ -14,18 +9,11 @@ import com.example.Packets.MousePackets;
 import com.example.Packets.WidgetPackets;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
-import com.piggyplugins.PiggyUtils.API.InventoryUtil;
 import com.piggyplugins.PiggyUtils.BreakHandler.ReflectBreakHandler;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
-import net.runelite.api.Client;
-import net.runelite.api.GameState;
-import net.runelite.api.NPC;
-import net.runelite.api.ObjectComposition;
-import net.runelite.api.Player;
-import net.runelite.api.TileObject;
-import net.runelite.api.events.AnimationChanged;
+import net.runelite.api.*;
+import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -37,7 +25,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.HotkeyListener;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @PluginDescriptor(
@@ -64,7 +51,7 @@ public class ItemCombinerPlugin extends Plugin {
     private boolean started;
     private int afkTicks;
     private boolean isMaking;
-    private boolean debug = true;
+    private boolean consumedAmulet;
 
     @Provides
     private ItemCombinerConfig getConfig(ConfigManager configManager) {
@@ -87,15 +74,24 @@ public class ItemCombinerPlugin extends Plugin {
         breakHandler.unregisterPlugin(this);
     }
 
+    @Subscribe
+    private void onChatMessage(ChatMessage event) {
+        if (event == null || event.getMessage() == null || event.getType() != ChatMessageType.GAMEMESSAGE) {
+            return;
+        }
+
+        if (event.getMessage().contains("It then crumbles to dust") && config.amuletOfChemistry()) {
+            consumedAmulet = true;
+            isMaking = false;
+        }
+    }
 
     @Subscribe
     private void onGameTick(GameTick event) {
         if (client.getGameState() != GameState.LOGGED_IN
                 || !started
                 || EthanApiPlugin.isMoving()
-                || client.getLocalPlayer().getAnimation() != -1
                 || breakHandler.isBreakActive(this)) {
-            afkTicks = 0;
             return;
         }
 
@@ -104,6 +100,7 @@ public class ItemCombinerPlugin extends Plugin {
         }
 
         if (isMaking) {
+            handleTimeout();
             return;
         }
 
@@ -114,16 +111,31 @@ public class ItemCombinerPlugin extends Plugin {
 
         Widget potionWidget = client.getWidget(17694734);
         if (potionWidget != null && !potionWidget.isHidden()) {
+            int itemOneQuantity = Inventory.search().withName(config.itemOneName()).result().size();
+            int itemTwoQuantity = Inventory.search().withName(config.itemTwoName()).result().size();
+            int quantity = (itemOneQuantity < itemTwoQuantity) ? itemOneQuantity : itemTwoQuantity;
             MousePackets.queueClickPacket();
-            WidgetPackets.queueResumePause(17694734, config.itemTwoAmt());
+            WidgetPackets.queueResumePause(17694734, quantity);
             isMaking = true;
             return;
         }
 
-        if (hasItems(Bank.isOpen())) {
+        if (hasItems(Bank.isOpen()) && !consumedAmulet) {
             useItems();
         } else {
             doBanking();
+        }
+
+    }
+
+    private void handleTimeout() {
+        if (client.getLocalPlayer().getAnimation() == -1) {
+            afkTicks++;
+        } else {
+            afkTicks = 0;
+        }
+        if (afkTicks >= 2) {
+            isMaking = false;
         }
     }
 
@@ -164,29 +176,55 @@ public class ItemCombinerPlugin extends Plugin {
     }
 
     private void doBanking() {
+        Widget depositInventory = client.getWidget(WidgetInfo.BANK_DEPOSIT_INVENTORY);
+
         if (!Bank.isOpen()) {
             findBank();
             return;
         }
-
-        Widget depositInventory = client.getWidget(WidgetInfo.BANK_DEPOSIT_INVENTORY);
 
         if (depositInventory != null) {
             MousePackets.queueClickPacket();
             WidgetPackets.queueWidgetAction(depositInventory, "Deposit inventory");
         }
 
-        Bank.search().withName(config.itemOneName()).first().ifPresentOrElse(item -> {
-            BankInteraction.withdrawX(item, config.itemOneAmt());
-        }, () -> {
-            EthanApiPlugin.stopPlugin(this);
-        });
+        if (config.amuletOfChemistry() && !hasAmulet()) {
+            consumedAmulet = true;
+        }
 
-        Bank.search().withName(config.itemTwoName()).first().ifPresentOrElse(item -> {
-            BankInteraction.withdrawX(item, config.itemTwoAmt());
-        }, () -> {
+        if (config.amuletOfChemistry() && consumedAmulet) {
+            handleAmulet();
+        } else {
+            Bank.search().withName(config.itemOneName()).first().ifPresentOrElse(item -> {
+                BankInteraction.withdrawX(item, config.itemOneAmt());
+            }, () -> {
+                EthanApiPlugin.stopPlugin(this);
+                client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>ItemCombiner Plugin:</col> Out of " + config.itemOneName(), null);
+            });
+
+            Bank.search().withName(config.itemTwoName()).first().ifPresentOrElse(item -> {
+                BankInteraction.withdrawX(item, config.itemTwoAmt());
+            }, () -> {
+                EthanApiPlugin.stopPlugin(this);
+                client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>ItemCombiner Plugin:</col> Out of " + config.itemTwoName(), null);
+            });
+        }
+    }
+
+    private boolean hasAmulet() {return Equipment.search().withId(ItemID.AMULET_OF_CHEMISTRY).first().isPresent();}
+
+    private void handleAmulet() {
+        Optional<Widget> amulet = Bank.search().withId(ItemID.AMULET_OF_CHEMISTRY).first();
+        if (amulet.isPresent()) {
+            MousePackets.queueClickPacket();
+            WidgetPackets.queueWidgetAction(amulet.get(), "Withdraw-1");
+            MousePackets.queueClickPacket();
+            WidgetPackets.queueWidgetActionPacket(9, WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getPackedId(), ItemID.AMULET_OF_CHEMISTRY, 0);
+            consumedAmulet = false;
+        } else {
             EthanApiPlugin.stopPlugin(this);
-        });
+            client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "<col=ff0000>ItemCombiner Plugin:</col> Out of amulets", null);
+        }
     }
 
     private void useItems() {
@@ -212,6 +250,7 @@ public class ItemCombinerPlugin extends Plugin {
         started = !started;
 
         if (started) {
+            isMaking = false;
             breakHandler.startPlugin(this);
         } else {
             breakHandler.stopPlugin(this);
