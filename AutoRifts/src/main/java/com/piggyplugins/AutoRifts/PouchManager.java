@@ -139,7 +139,7 @@ public class PouchManager {
                 Widget p = emptyPouch.get();
                 InventoryInteraction.useItem(p, "Fill");
                 int essenceWithdrawn = pouch.getEssenceTotal() - pouch.getCurrentEssence();
-                if (essenceAmount - essenceWithdrawn > 0) {
+                if (essenceAmount >= essenceWithdrawn) {
                     essenceAmount -= essenceWithdrawn;
                     pouch.setCurrentEssence(pouch.getEssenceTotal());
                 } else {
