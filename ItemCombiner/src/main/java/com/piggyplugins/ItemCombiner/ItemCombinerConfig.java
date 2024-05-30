@@ -12,7 +12,7 @@ public interface ItemCombinerConfig extends Config {
             keyName = "Toggle",
             name = "Toggle",
             description = "",
-            position = 0
+            position = 1
     )
     default Keybind toggle() {
         return Keybind.NOT_SET;
@@ -21,7 +21,7 @@ public interface ItemCombinerConfig extends Config {
     @ConfigSection(
             name = "Configuration",
             description = "Config for item combiner",
-            position = 1
+            position = 0
     )
     String configuration = "Configuration";
 
@@ -29,7 +29,8 @@ public interface ItemCombinerConfig extends Config {
             keyName = "itemOneName",
             name = "Item One (Tool/Vial)",
             description = "Name of the first item",
-            position = 2
+            position = 2,
+            section = configuration
     )
     default String itemOneName() {
         return "";
@@ -39,7 +40,8 @@ public interface ItemCombinerConfig extends Config {
             keyName = "itemOneAmt",
             name = "Item One Amount",
             description = "Amount of the first item",
-            position = 3
+            position = 3,
+            section = configuration
     )
     default int itemOneAmt() {
         return 14;
@@ -49,7 +51,8 @@ public interface ItemCombinerConfig extends Config {
             keyName = "itemTwoName",
             name = "Item Two (Herb/Second/Gem/Etc.)",
             description = "Name of the second item",
-            position = 4
+            position = 4,
+            section = configuration
     )
     default String itemTwoName() {
         return "";
@@ -59,9 +62,20 @@ public interface ItemCombinerConfig extends Config {
             keyName = "itemTwoAmt",
             name = "Item Two Amount",
             description = "Amount of the second item",
-            position = 4
+            position = 4,
+            section = configuration
     )
     default int itemTwoAmt() {
         return 14;
+    }
+
+    @ConfigItem(
+            keyName = "amuletOfChemistry",
+            name = "Use amulet of chemistry",
+            description = "Tick if you want to use amulet of chemistry",
+            position = 5,
+            section = configuration
+    )
+    default boolean amuletOfChemistry() {return false;
     }
 }
