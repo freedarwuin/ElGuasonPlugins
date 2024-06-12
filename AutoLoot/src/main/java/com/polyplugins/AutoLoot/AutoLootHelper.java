@@ -1,7 +1,15 @@
 /**
- * @author agge3
  * @file AutoLootHelper.java
+ * @class AutoLootHelper
+ * Helper - Modular looting automation. 
+ *
+ * @author agge3
+ * @version 1.0
+ * @since 2024-06-15
+ *
  * Derived in large part from AutoCombat.
+ * Majority of credit goes to PiggyPlugins. This is just a refactor with fixes.
+ * Thanks PiggyPlugins!
  */
 
 package com.polyplugins.AutoLoot;
@@ -25,7 +33,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 public class AutoLootHelper {
     @Inject
     private Client client;
@@ -44,7 +51,6 @@ public class AutoLootHelper {
 
     @Setter
     private List<String> lootNames = null;
-
 
     /**
      * Looks for the item by name and returns if there are any noted or stackable in the inventory

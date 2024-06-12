@@ -1,3 +1,14 @@
+/**
+ * @file Util.java
+ * @class Util
+ * Utility tools (mainly tick utilities and tick reference interface).
+ *
+ * @author agge3
+ * @version 1.0
+ * @since 2024-06-15
+ *
+ */
+
 package com.polyplugins.AutoLoot;
 
 import com.example.EthanApiPlugin.Collections.Inventory;
@@ -46,7 +57,14 @@ public class Util {
     }   
 
     public void shouldWait() {
-        flag = true;
+        this.flag = true;
+    }
+
+    /*
+     * Reset the state of Util.
+     */
+    public void reset() {
+        this.flag = false;
     }
 
     private boolean flag = false;

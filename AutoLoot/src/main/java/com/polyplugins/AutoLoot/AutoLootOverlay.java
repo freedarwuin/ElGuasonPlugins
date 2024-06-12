@@ -1,11 +1,18 @@
 /**
+ * @file AutoLootPlugin.java
+ * @class AutoLootPlugin
+ * Overlay - Modular looting automation. 
+ *
  * @author agge3
- * @file AutoLootOverlay.java
+ * @version 1.0
+ * @since 2024-06-15
+ *
  * Derived in large part from AutoCombat.
+ * Majority of credit goes to PiggyPlugins. This is just a refactor with fixes.
+ * Thanks PiggyPlugins!
  */
 
 package com.polyplugins.AutoLoot;
-
 
 import com.example.EthanApiPlugin.Collections.NPCs;
 import com.example.EthanApiPlugin.Collections.TileObjects;

@@ -1,7 +1,15 @@
 /**
+ * @file AutoLootPlugin.java
+ * @class AutoLootPlugin
+ * Tile overlay - Modular looting automation. 
+ *
  * @author agge3
- * @file AutoLootTileOverlay.java
+ * @version 1.0
+ * @since 2024-06-15
+ *
  * Derived in large part from AutoCombat.
+ * Majority of credit goes to PiggyPlugins. This is just a refactor with fixes.
+ * Thanks PiggyPlugins!
  */
 
 package com.polyplugins.AutoLoot;

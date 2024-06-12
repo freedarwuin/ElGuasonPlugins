@@ -1,7 +1,15 @@
 /**
- * @author agge3
  * @file AutoLootConfig.java
+ * @class AutoLootConfig
+ * Config - Modular looting automation. 
+ *
+ * @author agge3
+ * @version 1.0
+ * @since 2024-06-15
+ *
  * Derived in large part from AutoCombat.
+ * Majority of credit goes to PiggyPlugins. This is just a refactor with fixes.
+ * Thanks PiggyPlugins!
  */
 
 package com.polyplugins.AutoLoot;
@@ -22,8 +30,8 @@ public interface AutoLootConfig extends Config {
     }
 
     @ConfigSection(
-            name = "Auto Loot Configuration",
-            description = "Undefined behavior when ran with other looting interactions",
+            name = "AutoLoot Configuration",
+            description = "Modular looting automation. Don't run with other looting interactions!",
             position = 1,
             closedByDefault = false
     )
@@ -42,7 +50,7 @@ public interface AutoLootConfig extends Config {
 
     @ConfigItem(
             keyName = "waitTicks",
-            name = "Wait for...",
+            name = "Wait to loot (in ticks)",
             description = "How many ticks?",
             position = 3,
             section = autoLootConfig
@@ -51,7 +59,7 @@ public interface AutoLootConfig extends Config {
         return 0;
     }
 
-    // @todo Implement picking up self vs. other's.
+    /* @todo Implement picking up self vs. other's. */
     //@ConfigItem(
     //        keyName = "myPickupNames",
     //        name = "My pickup names",

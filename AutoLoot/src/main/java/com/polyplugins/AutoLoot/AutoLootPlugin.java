@@ -1,7 +1,15 @@
 /**
+ * @file AutoLootPlugin.java
+ * @class AutoLootPlugin
+ * Modular looting automation. 
+ *
  * @author agge3
- * @file AutoLootConfig.java
+ * @version 1.0
+ * @since 2024-06-15
+ *
  * Derived in large part from AutoCombat.
+ * Majority of credit goes to PiggyPlugins. This is just a refactor with fixes.
+ * Thanks PiggyPlugins!
  */
 
 package com.polyplugins.AutoLoot;
@@ -46,13 +54,18 @@ import java.util.*;
 
 @PluginDescriptor(
         name = "<html><font color=\"#FF9DF9\">[PP]</font> AutoLoot</html>",
-        description = "a(uto) looter",
+        description = "Modular looting automation",
         enabledByDefault = false,
         tags = {"piggy", "plugin"}
 )
 @Slf4j
 
 public class AutoLootPlugin extends Plugin {
+    @Inject
+    public PlayerUtil playerUtil;
+    @Inject
+    public AutoLootHelper lootHelper; 
+
     @Inject
     private Client client;
     @Inject
@@ -69,29 +82,24 @@ public class AutoLootPlugin extends Plugin {
     public ItemManager itemManager;
     @Inject
     private ClientThread clientThread;
-    @Inject
-    private Util util;
-
-    public boolean started = false;
-    public int timeout = 0;
-    public boolean shouldWait = false;
-    LocalPoint lootTile = null;
 
     @Provides
     private AutoLootConfig getConfig(ConfigManager configManager) {
         return configManager.getConfig(AutoLootConfig.class);
     }
 
-    @Inject
-    public PlayerUtil playerUtil;
-    @Inject
-    public AutoLootHelper lootHelper;
-
-    public Queue<ETileItem> lootQueue = new LinkedList<ETileItem>();
-    private boolean hasBones = false;
-    public IntPtr ticks = new IntPtr(0);
-    public int idleTicks = 0;
     public Player player = null;
+    public LocalPoint lootTile = null; 
+    
+    private Util util = null;
+    public IntPtr ticks = new IntPtr(0);
+    public Queue<ETileItem> lootQueue = new LinkedList<ETileItem>();
+    
+    public boolean started = false;
+    public int timeout = 0;
+    public int idleTicks = 0;
+
+    private boolean hasBones = false;
     private boolean looting = false;
 
     @Override
@@ -99,6 +107,14 @@ public class AutoLootPlugin extends Plugin {
         keyManager.registerKeyListener(toggle);
         overlayManager.add(overlay);
         overlayManager.add(tileOverlay);
+
+        init();
+    }
+
+    private void init() {
+        util = new Util();
+        ticks = new IntPtr(0);
+        lootQueue = new LinkedList<ETileItem>();
     }
 
     @Override  
@@ -106,18 +122,26 @@ public class AutoLootPlugin extends Plugin {
         keyManager.unregisterKeyListener(toggle);
         overlayManager.remove(overlay);
         overlayManager.remove(tileOverlay);
+
         resetEverything();
     }
 
-    public void resetEverything() {
-        timeout = 0;
-        started = false;
-        hasBones = false;
-        ticks.set(0);
-        idleTicks = 0;
-        lootQueue.clear();
-        lootTile = null;
+    private void resetEverything() {
         player = null;
+        lootTile = null;
+
+        // Don't lose the reference, this is not a re-init, just clear what we
+        // have.
+        ticks.set(0);
+        lootQueue.clear();
+        util.reset();
+
+        started = false;
+        timeout = 0;
+        idleTicks = 0;
+
+        hasBones = false;
+        looting = false;
     }
 
     @Subscribe
@@ -229,7 +253,6 @@ public class AutoLootPlugin extends Plugin {
         if (!started)
             return;
     }
-
 
     @Subscribe
     public void onVarbitChanged(VarbitChanged event) {
