@@ -40,13 +40,13 @@ public class Util {
     public boolean hasWaited(IntPtr ticks) {
         if (ticks.get() > config.waitFor()) {
             ticks.set(0);
-            flag = false;
+            this.flag = false;
         }
-        return !flag;
+        return !this.flag;
     }
 
     public boolean isWaiting(IntPtr ticks) {
-        if (flag) {
+        if (this.flag) {
             // ticks++
             int tmp = ticks.get();
             tmp++;
