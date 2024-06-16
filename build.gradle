@@ -29,82 +29,27 @@ allprojects {
 }
 
 dependencies {
-    implementation project(path: ':AutoTitheFarm')
-    implementation project(path: ':AutoAerial')
-    implementation project(path: ":AutoRuneDragons")
-    implementation project(path: ':AutoBoner')
-    implementation project(path: ':AutoChompy')
-    implementation project(path: ':AutoCombat')
-    implementation project(path: ':AutoTrapper')
-    implementation project(path: ':AutoSmith')
-    implementation project(path: ':ButterflyCatcher')
-    implementation project(path: ':CluePuzzleSolver')
-    implementation project(path: ':DialogueContinuer')
-    implementation project(path: ':Firemaking')
-    implementation project(path: ':KittenFeeder')
-    implementation project(path: ':AutoJugHumidifier')
-    implementation project(path: ':AutoRifts')
-    implementation project(path: ':AutoTele')
-    implementation project(path: ':CalvarionHelper')
-    implementation project(path: ':E3T4G')
     implementation project(path: ':EthansApi')
     implementation project(path: ':ChinBreakHandler')
-    implementation project(path: ':GauntletFlicker')
-    implementation project(path: ':Harpoon2Ticker')
-    implementation project(path: ':HerbCleaner')
-    implementation project(path: ':ItemCombiner')
-    implementation project(path: ':ItemDropper')
-    implementation project(path: ':JadAutoPrayers')
-    implementation project(path: ':LavaRunecrafter')
-    implementation project(path: ':NightmareHelper')
-    implementation project(path: ':OneTickSwitcher')
     implementation project(path: ':PiggyUtils')
-    implementation project(path: ':PowerSkiller')
-    implementation project(path: ':PrayerFlicker')
-    implementation project(path: ':PrayAgainstPlayer')
-    implementation project(path: ':RooftopAgility')
-    implementation project(path: ':RunEnabler')
-    implementation project(path: ':ShiftClickWalker')
-    implementation project(path: ':SixHourLog')
-    implementation project(path: ':SpeedDartMaker')
-    implementation project(path: ':SuperglassMake')
-    implementation project(path: ':StrategyExample')
-    implementation project(path: ':UpkeepPlugin')
-    implementation project(path: ':VardorvisHelper')
-    implementation project(path: ':DropParty')
-    implementation project(path: ':BetterProfiles')
-    implementation project(path: ':PathingTesting')
-    implementation project(path: ':LeftClickBlackJack')
     implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
 }
 
 sourceSets {
-
     main {
-
         java {
             srcDir "src"
         }
-
     }
 }
 
-group = 'com.piggyplugins'
-version = '1.2.7'
+group = 'com.runeliteplugins'
+version = '1.0.0'
 sourceCompatibility = "11"
 
-task FatJar(type: Jar) {
+tasks.register('FatJar', Jar) {
     manifest {
-        attributes 'Main-Class': 'com.example.Main'
-    }
-    baseName = 'piggy-plugins-aio'
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-task PiggyJar(type: Jar) {
-    manifest {
+        attributes 'Main-Class': 'com.runeliteplugins.Main'
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -112,29 +57,14 @@ task PiggyJar(type: Jar) {
 }
 
 subprojects {
-    tasks.withType(Jar) {
-        doLast {
-            copy {
-                from("./build/libs/")
-                into("../release/")
+    tasks.withType(Jar).tap {
+        configureEach {
+            doLast {
+                copy {
+                    from("./build/libs/")
+                    into("../release/")
+                }
             }
-        }
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                username 'admin'
-                password 'password'
-            }
-            url "http://baseUrl/artifactory/libs-release-local"
         }
     }
 }
