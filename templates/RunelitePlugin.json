@@ -1,0 +1,104 @@
+{
+	"template": {
+		"name": "",
+		"isDir": true,
+		"placeholders": {
+			"PACKAGE_NAME": "com.runeliteplugins",
+			"PLUGIN_NAME": "AutoPlugin",
+			"PLUGIN_DESCRIPTION": "A plugin built for you!"
+		},
+		"fileTemplates": {
+			"${PLUGIN_NAME}Plugin": "Runelite Plugin",
+			"${PLUGIN_NAME}Overlay": "Runelite Plugin Overlay",
+			"${PLUGIN_NAME}Config": "Runelite Plugin Config",
+			"build.gradle": "Runelite Plugin Build"
+		},
+		"realChildren": [
+			{
+				"name": "${PLUGIN_NAME}",
+				"isDir": true,
+				"realChildren": [
+					{
+						"name": "src",
+						"isDir": true,
+						"realChildren": [
+							{
+								"name": "main",
+								"isDir": true,
+								"realChildren": [
+									{
+										"name": "java",
+										"isDir": true,
+										"realChildren": [
+											{
+												"name": "${PACKAGE_NAME}.${PLUGIN_NAME}",
+												"isDir": true,
+												"realChildren": [
+													{
+														"name": "${PLUGIN_NAME}Plugin",
+														"isDir": false,
+														"placeholders": {},
+														"fileTemplates": {},
+														"realChildren": []
+													},
+													{
+														"name": "${PLUGIN_NAME}Overlay",
+														"isDir": false,
+														"placeholders": {},
+														"fileTemplates": {},
+														"realChildren": []
+													},
+													{
+														"name": "${PLUGIN_NAME}Config",
+														"isDir": false,
+														"placeholders": {},
+														"fileTemplates": {},
+														"realChildren": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"name": "resources",
+										"isDir": true,
+										"realChildren": []
+									}
+								]
+							},
+							{
+								"name": "test",
+								"isDir": true,
+								"realChildren": [
+									{
+										"name": "java",
+										"isDir": true,
+										"realChildren": []
+									},
+									{
+										"name": "resources",
+										"isDir": true,
+										"realChildren": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"name": "build.gradle",
+						"isDir": false,
+						"placeholders": {},
+						"fileTemplates": {},
+						"realChildren": []
+					}
+				]
+			}
+		]
+	},
+	"language": "java",
+	"templateName": "RunelitePlugin",
+	"lowercaseDir": false,
+	"capitalizeFile": false,
+	"packageNameToDir": false,
+	"enableApacheVelocity": true
+}
