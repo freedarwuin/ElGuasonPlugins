@@ -8,12 +8,12 @@ For <code>runelite.sh</code>, source what was provided in the repo and change as
 Lutris should take care of everything for you!
 #### Gotchas:
 Make sure to have the correct jdk and path. The current <code>runelite.sh</code> fully qualifies Eclipse Temurin's jdk on Fedora.<br><br>
-You can find and edit the current <code>runelite.sh</code> in the Wine prefix Lutris installed.<br><br>
+After the fact, you can find and edit the current <code>runelite.sh</code> in the Wine prefix Lutris installed.<br><br>
 (Example path):
 ```
 /Games/jagex-launcher/drive_c/Program Files (x86)/Jagex Launcher/Games/RuneLite/runelite.sh
 ```
-Or locally rework the provided <code>runelite.sh</code> and source it in the Lutris install.
+(Or rework the provided <code>runelite.sh</code> before sourcing it in the Lutris install)
 ### Install jdk
 #### Fedora:
 (Taken from https://adoptium.net/installation/linux/)<br>
