@@ -46,7 +46,7 @@ $ eselect java-vm list
 ```
 Java path for <code>runelite.sh</code>:
 ```
-/usr/lib/nvm/openjdk-bin-11/bin/java
+/usr/lib/jvm/openjdk-bin-11/bin/java
 ```
 (Note: Gentoo's main repo bin is compiled by Eclipse Temurin)
 
