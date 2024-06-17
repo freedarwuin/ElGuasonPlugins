@@ -52,8 +52,8 @@ Java path for <code>runelite.sh</code>:
 
 ## Help
 Unless you have a wonky setup, the path for the classes should work.<br><br>
-If it doesn't, run <code>lutris -d</code> with debug enabled. If the class path can't be loaded, it's a FULLY qualified path. Make sure the path matches the lutris install directory for the wine prefix.<br><br>
-From experience, if the problem isn't with lutris, it's from paths. Fully qualified paths will reduce errors and likely be the fix. If the class path isn't loading, find your paths and use fully qualified paths.
+If it doesn't, run <code>lutris -d</code> with debug enabled. If the class path can't be loaded, it's a FULLY qualified path. Make sure the path matches the Lutris install directory for the Wine prefix.<br><br>
+From experience, if the problem isn't with Lutris, it's from paths. Fully qualified paths will reduce errors and likely be the fix. If the class path isn't loading, find your paths and use fully qualified paths.
 
 ## Credit
 Lutris yaml has been heavily borrowed from [TormStorm's jagex-launcher-linux](https://github.com/TormStorm/jagex-launcher-linux).<br><br>
