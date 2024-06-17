@@ -2,7 +2,10 @@
 Knowledge of Lutris, gaming on Linux, etc. A guide for that is not the scope of this.
 
 ## Instructions
-Local import the <code>jagex-launcher.yml</code> into Lutris, it should do everything for you.
+<code>git clone</code> the repo.<br><br>
+Import the <code>jagex-launcher.yml</code> into Lutris.<br><br>
+For <code>runelite.sh</code>, source what was provided in the repo and change as needed.<br><br>
+Lutris should take care of everything for you!
 #### Gotchas:
 Make sure to have the correct jdk and path. The current <code>runelite.sh</code> fully qualifies Eclipse Temurin's jdk on Fedora.<br><br>
 You can find and edit the current <code>runelite.sh</code> in the Wine prefix Lutris installed.<br><br>

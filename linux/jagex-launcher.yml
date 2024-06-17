@@ -9,7 +9,7 @@ script:
     - installer: https://github.com/TormStorm/jagex-launcher-linux/releases/download/v1.0.1/installer.py
     - requirements: https://github.com/TormStorm/jagex-launcher-linux/releases/download/v1.0.1/requirements.txt
     - runelite: https://github.com/runelite/launcher/releases/download/2.7.1/RuneLite.jar
-    - runelite-launcher: https://github.com/agge3/PiggyPlugins/blob/linux/runelite.sh
+    - runelite-launcher: $HOME/PiggyPlugins/runelite.sh
     - runelite-hijack: https://github.com/Ethan-Vann/Installer/releases/download/1.0/RuneliteHijack.jar
     - piggy-plugins:  https://github.com/0Hutch/PiggyPlugins/releases/download/release/piggy-plugins-aio-1.2.7.jar 
   require-binaries: python3
@@ -62,7 +62,6 @@ script:
     - merge:
         src: runelite-hijack
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Jagex Launcher/Games/RuneLite"
-    - chmodx: "$GAMEDIR/drive_c/Program Files (x86)/Jagex Launcher/Games/RuneLite/EthanVannInstaller.jar"
     - merge:
         src: runelite
         dst: "$GAMEDIR/drive_c/Program Files (x86)/Jagex Launcher/Games/RuneLite"
