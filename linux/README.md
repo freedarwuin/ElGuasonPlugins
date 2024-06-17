@@ -2,9 +2,15 @@
 Knowledge of Lutris, gaming on Linux, etc. A guide for that is not the scope of this.
 
 ## Instructions
-Local import the <code>jagex-launcher.yml</code> into Lutris, it should do everything for you.<br><br>
-**Gotchas:**<br>
-Make sure to have the correct jdk installed. The current runner fully qualifies Eclipse Temurin's jdk on Fedora.
+Local import the <code>jagex-launcher.yml</code> into Lutris, it should do everything for you.
+#### Gotchas:
+Make sure to have the correct jdk and path. The current <code>runelite.sh</code> fully qualifies Eclipse Temurin's jdk on Fedora.<br><br>
+You can find and edit the current <code>runelite.sh</code> in the Wine prefix Lutris installed.<br><br>
+(Example path):
+```
+/Games/jagex-launcher/drive_c/Program Files (x86)/Jagex Launcher/Games/RuneLite/runelite.sh
+```
+Or locally rework the provided <code>runelite.sh</code> and source it in the Lutris install.
 ### Install jdk
 #### Fedora:
 (Taken from https://adoptium.net/installation/linux/)<br>
@@ -24,7 +30,7 @@ EOF
 ```
 # yum install temurin-11-jdk
 ```
-And the current runner's java bin path will work!<br>
+And the current <code>runelite.sh</code> java bin path will work!<br>
 #### Gentoo:
 ```
 # emerge --ask dev-java/openjdk-bin:11
@@ -33,9 +39,9 @@ And the current runner's java bin path will work!<br>
 $ eselect java-vm list
 ```
 ```
-# eselect java-vm set system openjdk-bin-11-my_number
+# eselect java-vm set system my_number
 ```
-Java path for runner:
+Java path for <code>runelite.sh</code>:
 ```
 /usr/lib/nvm/openjdk-bin-11/bin/java
 ```
