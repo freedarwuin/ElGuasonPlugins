@@ -9,10 +9,12 @@ import com.example.EthanApiPlugin.EthanApiPlugin;
 import com.example.InteractionApi.BankInteraction;
 import com.example.InteractionApi.NPCInteraction;
 import com.example.InteractionApi.TileObjectInteraction;
+import com.example.EthanApiPlugin.Collections.query.TileObjectQuery;
 import com.example.Packets.MousePackets;
 import com.example.Packets.WidgetPackets;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.piggyplugins.PiggyUtils.API.InventoryUtil;
 import com.piggyplugins.PiggyUtils.BreakHandler.ReflectBreakHandler;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,10 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.NPC;
+import net.runelite.api.ObjectComposition;
+import net.runelite.api.Player;
 import net.runelite.api.TileObject;
+import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -32,6 +37,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.HotkeyListener;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -136,23 +142,23 @@ public class ItemCombinerPlugin extends Plugin {
         Optional<TileObject> chest3 = TileObjects.search().withName("Bank Chest-wreck").nearestToPlayer();
         Optional<NPC> banker = NPCs.search().withAction("Bank").nearestToPlayer();
         Optional<TileObject> booth = TileObjects.search().withAction("Bank").nearestToPlayer();
-        if (chest1.isPresent()) {
+        if (chest1.isPresent()){
             TileObjectInteraction.interact(chest1.get(), "Use");
             return;
         }
-        if (chest2.isPresent()) {
+        if (chest2.isPresent()){
             TileObjectInteraction.interact(chest2.get(), "Use");
             return;
         }
-        if (chest3.isPresent()) {
+        if (chest3.isPresent()){
             TileObjectInteraction.interact(chest3.get(), "Use");
             return;
         }
-        if (booth.isPresent()) {
+        if (booth.isPresent()){
             TileObjectInteraction.interact(booth.get(), "Bank");
             return;
         }
-        if (banker.isPresent()) {
+        if (banker.isPresent()){
             NPCInteraction.interact(banker.get(), "Bank");
             return;
         }
