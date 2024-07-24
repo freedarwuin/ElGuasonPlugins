@@ -378,7 +378,22 @@ class BetterProfilesPanel extends PluginPanel {
 
         boolean error = false;
         try {
-            redrawProfiles();
+            byte[] saltBytes = getSalt();
+            char[] passBytes = txtDecryptPassword.getPassword();
+
+            String encrypted = betterProfilesConfig.profilesData();
+            if (encrypted.startsWith("¬")) {
+                encrypted = encrypted.replaceFirst("¬", "");
+            }
+
+            byte[] dataBytes = base64Decode(encrypted);
+            SecretKey aesKey = getAesKey(passBytes, saltBytes);
+            String decrypted = decryptText(dataBytes, aesKey);
+
+            addAccounts(decrypted);
+
+            // Reset the input fields
+            txtDecryptPassword.setText("");
         } catch (InvalidKeySpecException | NoSuchAlgorithmException | IllegalBlockSizeException |
                  InvalidKeyException | BadPaddingException | NoSuchPaddingException ex) {
             error = true;
@@ -396,6 +411,7 @@ class BetterProfilesPanel extends PluginPanel {
         profilesPanel.setLayout(new DynamicGridLayout(0, 1, 0, 3));
         add(profilesPanel, BorderLayout.SOUTH);
     }
+
 
     void redrawProfiles() throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
         profilesPanel.removeAll();
@@ -435,6 +451,75 @@ class BetterProfilesPanel extends PluginPanel {
 
     }
 
+    private String getProfileData() throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        String tmp = betterProfilesConfig.profilesData();
+        if (tmp.startsWith("¬")) {
+            tmp = tmp.substring(1); // Changed to remove the first character ¬
+            byte[] dataBytes = base64Decode(tmp);
+            byte[] saltBytes = getSalt();
+            char[] passBytes = txtDecryptPassword.getPassword();
+            SecretKey aesKey = getAesKey(passBytes, saltBytes);
+            return decryptText(dataBytes, aesKey);
+        }
+        return tmp;
+    }
+
+
+    private boolean setProfileData(String data) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        if (txtDecryptPassword.getPassword().length == 0 || String.valueOf(txtDecryptPassword.getPassword()).equals(UNLOCK_PASSWORD)) {
+            showErrorMessage("Unable to save data", "Please enter a password!");
+            return false;
+        }
+        char[] passBytes = txtDecryptPassword.getPassword();
+        byte[] saltBytes = getSalt();
+        if (saltBytes.length == 0) {
+            SecureRandom.getInstanceStrong().nextBytes(saltBytes);
+            setSalt(saltBytes);
+        }
+        SecretKey aesKey = getAesKey(passBytes, saltBytes);
+        byte[] enc = encryptText(data, aesKey);
+        if (enc.length == 0) {
+            return false;
+        }
+        String s = "¬" + base64Encode(enc);
+        betterProfilesConfig.profilesData(s);
+        return true;
+    }
+
+    private static byte[] encryptText(String text, SecretKey aesKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        Cipher cipher = Cipher.getInstance("AES");
+        SecretKeySpec newKey = new SecretKeySpec(aesKey.getEncoded(), "AES");
+        cipher.init(Cipher.ENCRYPT_MODE, newKey);
+        return cipher.doFinal(text.getBytes());
+    }
+
+
+    private static String decryptText(byte[] enc, SecretKey aesKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+        Cipher cipher = Cipher.getInstance("AES");
+        SecretKeySpec sks = new SecretKeySpec(aesKey.getEncoded(), "AES");
+        cipher.init(Cipher.DECRYPT_MODE, sks);
+        return new String(cipher.doFinal(enc));
+    }
+
+
+    private SecretKey getAesKey(char[] passBytes, byte[] saltBytes) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        KeySpec spec = new PBEKeySpec(passBytes, saltBytes, iterations, 128);
+        return factory.generateSecret(spec);
+    }
+
+    private byte[] base64Decode(String data) {
+        int paddingCount = (4 - data.length() % 4) % 4;
+        for (int i = 0; i < paddingCount; i++) {
+            data += "=";
+        }
+        return Base64.getDecoder().decode(data);
+    }
+
+    private String base64Encode(byte[] data) {
+        return Base64.getEncoder().encodeToString(data);
+    }
+
     private void setSalt(byte[] bytes) {
         betterProfilesConfig.salt(base64Encode(bytes));
     }
@@ -446,67 +531,6 @@ class BetterProfilesPanel extends PluginPanel {
         return base64Decode(betterProfilesConfig.salt());
     }
 
-    private SecretKey getAesKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        if (getSalt().length == 0) {
-            byte[] b = new byte[16];
-            SecureRandom.getInstanceStrong().nextBytes(b);
-            setSalt(b);
-        }
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-        KeySpec spec = new PBEKeySpec(txtDecryptPassword.getPassword(), getSalt(), iterations, 128);
-        return factory.generateSecret(spec);
-    }
-
-    private String getProfileData() throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
-        String tmp = betterProfilesConfig.profilesData();
-        if (tmp.startsWith("¬")) {
-            tmp = tmp.substring(2);
-            return decryptText(base64Decode(tmp), getAesKey());
-        }
-        return tmp;
-    }
-
-    private boolean setProfileData(String data) throws InvalidKeySpecException, NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
-        if (txtDecryptPassword.getPassword().length == 0 || String.valueOf(txtDecryptPassword.getPassword()).equals(UNLOCK_PASSWORD)) {
-            showErrorMessage("Unable to save data", "Please enter a password!");
-            return false;
-        }
-        byte[] enc = encryptText(data, getAesKey());
-        if (enc.length == 0) {
-            return false;
-        }
-        String s = "¬" + base64Encode(enc);
-        betterProfilesConfig.profilesData(s);
-        return true;
-    }
-
-    private byte[] base64Decode(String data) {
-        return Base64.getDecoder().decode(data);
-    }
-
-    private String base64Encode(byte[] data) {
-        return Base64.getEncoder().encodeToString(data);
-    }
-
-    /**
-     * Encrypts login info
-     *
-     * @param text text to encrypt
-     * @return encrypted string
-     */
-    private static byte[] encryptText(String text, SecretKey aesKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
-        Cipher cipher = Cipher.getInstance("AES");
-        SecretKeySpec newKey = new SecretKeySpec(aesKey.getEncoded(), "AES");
-        cipher.init(Cipher.ENCRYPT_MODE, newKey);
-        return cipher.doFinal(text.getBytes());
-    }
-
-    private static String decryptText(byte[] enc, SecretKey aesKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
-        Cipher cipher = Cipher.getInstance("AES");
-        SecretKeySpec newKey = new SecretKeySpec(aesKey.getEncoded(), "AES");
-        cipher.init(Cipher.DECRYPT_MODE, newKey);
-        return new String(cipher.doFinal(enc));
-    }
 
     private static void showErrorMessage(String title, String text) {
         //TODO FIX
