@@ -207,7 +207,8 @@ public class ChinBreakHandlerAccountPanel extends JPanel
             {
                 try
                 {
-                    ChinBreakHandlerPlugin.data = ProfilesData.getProfileData(configManager, passwordField.getPassword());
+                    ProfilesData profilesData = new ProfilesData();
+                    ChinBreakHandlerPlugin.data = profilesData.getProfileData(configManager, passwordField.getPassword());
                     contentPanel(LoginMode.PROFILES);
                 }
                 catch (InvalidKeySpecException | NoSuchPaddingException | BadPaddingException | InvalidKeyException | IllegalBlockSizeException | NoSuchAlgorithmException ignored)
