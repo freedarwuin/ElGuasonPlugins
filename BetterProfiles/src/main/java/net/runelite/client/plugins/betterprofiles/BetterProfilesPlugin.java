@@ -78,21 +78,26 @@ public class BetterProfilesPlugin extends Plugin {
         panel = injector.getInstance(BetterProfilesPanel.class);
         panel.init();
 
-        final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "profiles_icon.png");
+        // Load the image using the correct path
+        final BufferedImage icon = ImageUtil.loadImageResource(getClass(), "/net/runelite/client/plugins/betterprofiles/profiles_icon.png");
+        if (icon != null) {
+            navButton = NavigationButton.builder()
+                    .tooltip("Profiles")
+                    .icon(icon)
+                    .priority(8)
+                    .panel(panel)
+                    .build();
+        }
 
-        navButton = NavigationButton.builder()
-                .tooltip("Profiles")
-                .icon(icon)
-                .priority(8)
-                .panel(panel)
-                .build();
-
-        clientToolbar.addNavigation(navButton);
+        if (navButton != null) {
+            clientToolbar.addNavigation(navButton);
+        }
     }
 
     @Override
     protected void shutDown() {
         clientToolbar.removeNavigation(navButton);
+
     }
 
     @Subscribe
