@@ -106,7 +106,7 @@ public class ChinBreakHandlerAccountPanel extends JPanel
         });
 
         jagexLauncherButton.addActionListener(e -> {
-            configManager.setConfiguration("piggyBreakHandler", "accountselection", LoginMode.PROFILES);
+            configManager.setConfiguration("piggyBreakHandler", "accountselection", LoginMode.LAUNCHER);
             contentPanel(LoginMode.LAUNCHER);
         });
 
