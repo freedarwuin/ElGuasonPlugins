@@ -109,14 +109,20 @@ class BetterProfilesPanel extends PluginPanel {
         // Setup for txtDecryptPassword
         setupPasswordField(txtDecryptPassword, UNLOCK_PASSWORD);
 
-        JButton btnLoadAccounts = new JButton(LOAD_ACCOUNTS);
-        btnLoadAccounts.setToolTipText(LOAD_ACCOUNTS);
-        btnLoadAccounts.addMouseListener(new MouseAdapter() {
+        // Create and set action for the button
+        Action loadAccountsAction = new AbstractAction(LOAD_ACCOUNTS) {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 decryptAccounts();
             }
-        });
+        };
+
+        JButton btnLoadAccounts = new JButton(loadAccountsAction);
+        btnLoadAccounts.setToolTipText(LOAD_ACCOUNTS);
+
+        // Binding "Enter" key to the action for txtDecryptPassword
+        txtDecryptPassword.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "loadAccounts");
+        txtDecryptPassword.getActionMap().put("loadAccounts", loadAccountsAction);
 
         loginPanel.add(txtDecryptPassword);
         loginPanel.add(btnLoadAccounts);
