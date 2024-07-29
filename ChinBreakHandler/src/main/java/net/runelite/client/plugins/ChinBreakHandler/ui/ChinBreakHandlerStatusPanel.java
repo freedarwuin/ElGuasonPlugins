@@ -103,10 +103,14 @@ public class ChinBreakHandlerStatusPanel extends JPanel
                 absSeconds % 60);
     }
 
-    private boolean isInInactiveHours()
-    {
+    private boolean isInInactiveHours() {
         LocalTime now = LocalTime.now();
-        return !now.isBefore(inactiveStartTime) && !now.isAfter(inactiveEndTime);
+
+        if (inactiveStartTime.isBefore(inactiveEndTime)) {
+            return !now.isBefore(inactiveStartTime) && !now.isAfter(inactiveEndTime);
+        } else {
+            return !now.isBefore(inactiveStartTime) || !now.isAfter(inactiveEndTime);
+        }
     }
 
     private void milliseconds(long ignored)
@@ -116,13 +120,6 @@ public class ChinBreakHandlerStatusPanel extends JPanel
 
         boolean isInInactiveHours = isInInactiveHours();
         boolean isBreakActive = chinBreakHandler.isBreakActive(plugin);
-
-        if (isInInactiveHours && isBreakActive)
-        {
-            timeLabel.setText("Inactive Hours Active");
-            return;
-        }
-
 
         Map<Plugin, Instant> startTimes = chinBreakHandler.getStartTimes();
 
@@ -138,7 +135,11 @@ public class ChinBreakHandlerStatusPanel extends JPanel
         {
             breaksLabel.setText(String.valueOf(chinBreakHandler.getAmountOfBreaks().get(plugin)));
         }
-
+        if (isInInactiveHours && isBreakActive)
+        {
+            timeLabel.setText("Inactive Hours Active");
+            return;
+        }
         if (!chinBreakHandler.isBreakPlanned(plugin) && !chinBreakHandler.isBreakActive(plugin))
         {
             timeLabel.setText("00:00:00");
