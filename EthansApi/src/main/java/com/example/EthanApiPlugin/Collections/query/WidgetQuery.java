@@ -25,7 +25,7 @@ public class WidgetQuery {
     }
 
     public WidgetQuery withAction(String action) {
-        widgets = widgets.stream().filter(widget -> widget.getActions() != null && Arrays.asList(widget.getActions()).contains(action)).collect(java.util.stream.Collectors.toList());
+        widgets = widgets.stream().filter(widget -> widget.getActions() != null && Arrays.asList(widget.getActions()).contains(action)).collect(Collectors.toList());
         return this;
     }
 
