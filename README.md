@@ -88,9 +88,6 @@ Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **ext
 
 [![Download Guide](https://img.shields.io/badge/Download%20Guide-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1125186871224447057)
 
-
-jkdjkjklfjkldfjkldfjkldfjkldf
-
 [![Free Plugins Help](https://img.shields.io/badge/Free%20Plugins%20Help-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1124636010349871134)
 
 [![FAQ](https://img.shields.io/badge/FAQ-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1253908554616934521)
