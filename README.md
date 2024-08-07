@@ -34,7 +34,7 @@ Plugins de automatización de RuneLite
 - Added Auto WC Guild
 - Added Auto Mining Guild
 - Added Auto Shopper
-- 
+
 **Plugins Free**:
 - GG Guardians Of The Rift
 - GG Auto Tithe Farm
