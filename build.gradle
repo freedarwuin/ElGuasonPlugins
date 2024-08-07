@@ -123,6 +123,7 @@ dependencies {
     implementation project(path: ':AutoMinnows')
     implementation project(path: ':AutoKarambwans')
     implementation project(path: ':K1Tick')
+    implementation project(path: ':AerialFishing')
 
 }
 
@@ -153,9 +154,9 @@ group = 'com.piggyplugins'
 //version = 'wuendis .p' // prueba
 //version = 'Miguel guzman' // TRABAJADOR
 //version = 'Daniel Romero'
-//version = 'freedarwuin'
+version = 'freedarwuin'
 //version= 'bomdiggidy '
-version = 'louisenyel_00128'
+//version = 'louisenyel_00128'
 sourceCompatibility = "11"
 
 task FatJar(type: Jar) {
