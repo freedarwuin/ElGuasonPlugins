@@ -1,49 +1,49 @@
-Fork of EthanVann's EthanApiPlugin
+Tenedor de EthanVann's EthanApiPlugin
 
-RuneLite Automation Plugins
+Plugins de automatización de RuneLite
 
 # Discord
 
-[![Join our Discord](https://img.shields.io/discord/1124614852187533322?style=flat-square&logo=discord&logoColor=white&label=Join%20our%20Server&color=7289DA)](https://discord.gg/piggyplugins)
+[![Únase a nuestro discord](https://img.shields.io/discord/1124614852187533322?style=flat-square&logo=discord&logoColor=white&label=Join%20our%20Server&color=7289DA)](https://discord.gg/zp9P6QqytU)
 
 
 
-# Release 3.3
-*Updated 7/4/2024 7:32 AM EST*
+# Versión 3.3
+*Actualizado el 4 de julio de 2024 a las 7:32 a. m. EST*
 
-**Free Plugins**:
-- Piggy Guardians Of The Rift
-- Piggy Auto Tithe Farm
-- Piggy PVP Helper
-- Piggy Vardorvis Auto Prayer
-- Piggy Item Combiner
-- Piggy Jad Auto Prayers
-- Piggy Speed Dart Marker
-- Piggy Humidify Jugs
-- Piggy Power Skiller
-- Piggy Herb Cleaner
-- Piggy Drop Party
-- Piggy Auto Aerial Fishing
-- Piggy Auto Boner
-- Piggy Auto Chompy
-- Piggy Auto Firemaking
-- Piggy Auto Smither
-- Piggy Butterfly Catcher
-- Piggy Dialogue Continuer
-- Piggy Kitten Feeder
-- Piggy Lava Runecrafter
-- Piggy Nightmare Helper
-- Piggy Auto Tele
-- Piggy PrayerFlickerPlugin
-- Piggy GauntletFlickSwitch
-- Piggy Calvarion Helper
-- Piggy Run Enabler
-- Piggy Super Glass Maker
-- Piggy Sword Fish 2 Tick
-- Piggy Upkeep Plugin (Auto Eater)
-- Piggy Clue Puzzle Solver
+**Plugins Free**:
+- GG Guardians Of The Rift
+- GG Auto Tithe Farm
+- GG PVP Helper
+- GG Vardorvis Auto Prayer
+- GG Item Combiner
+- GG Jad Auto Prayers
+- GG Speed Dart Marker
+- GG Humidify Jugs
+- GG Power Skiller
+- GG Herb Cleaner
+- GG Drop Party
+- GG Auto Aerial Fishing
+- GG Auto Boner
+- GG Auto Chompy
+- GG Auto Firemaking
+- GG Auto Smither
+- GG Butterfly Catcher
+- GG Dialogue Continuer
+- GG Kitten Feeder
+- GG Lava Runecrafter
+- GG Nightmare Helper
+- GG Auto Tele
+- GG PrayerFlickerPlugin
+- GG GauntletFlickSwitch
+- GG Calvarion Helper
+- GG Run Enabler
+- GG Super Glass Maker
+- GG Sword Fish 2 Tick
+- GG Upkeep Plugin (Auto Eater)
+- GG Clue Puzzle Solver
 
-**Ported Plugins**
+**Plugins portados**
 - Owain's Chinbreakhandler
 - Illumine's Rooftops
 - xKylee's PrayAgainstPlayer
@@ -52,16 +52,16 @@ RuneLite Automation Plugins
 
 
 
-# Instructions
-Simply double click your free Piggy Plugins jar.
+# Instrucciones
+Simplemente haz doble clic en tu jar gratuito de complementos Piggy.
 
-You will be prompted by Piggy Plugins Installer then click Install Sideloader.
+El instalador de los plugins GG te lo indicará y luego haz clic en Instalar Sideloader.
 
-If you already have Piggy Plugins/EthanInstaller on your RuneLite and the Piggy Installer shows as installed go into .runelite and drag the plugins in externalplugins or sideloaded-plugins make sure all outdated versions are removed from your client.
+Si ya tienes GG Plugins/EthanInstaller en tu RuneLite y el instalador GG aparece como instalado, ve a .runelite y arrastra los complementos a **externalplugins** o **sideloaded-plugins**. Asegúrate de que todas las versiones obsoletas se hayan eliminado de tu cliente.
 
-If it shows up as installed and you do not have a sideloaded-plugins or externalplugins folder or you can have any other issues you can use one of the links below.
+Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **externalplugins** o tienes cualquier otro problema, puedes usar uno de los enlaces que aparecen a continuación.
 
-# Links
+# Enlaces
 [![Auto ToB](https://img.shields.io/badge/Auto%20ToB-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1188431292115722270)
 
 [![Download Guide](https://img.shields.io/badge/Download%20Guide-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1125186871224447057)
