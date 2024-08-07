@@ -18,7 +18,7 @@ public interface DialogueContinuerConfig extends Config {
                 "\n\nOnly unnoted empty vials and jugs are dropped";
     }
 
-    @ConfigItem(
+    /*@ConfigItem(
             keyName = "Toggle",
             name = "Toggle",
             description = "",
@@ -26,7 +26,7 @@ public interface DialogueContinuerConfig extends Config {
     )
     default Keybind toggle() {
         return Keybind.NOT_SET;
-    }
+    }*/
 
     @ConfigItem(
             name = "Continue Dialogue",
