@@ -11,6 +11,30 @@ Plugins de automatización de RuneLite
 # Versión 3.3
 *Actualizado el 4 de julio de 2024 a las 7:32 a. m. EST*
 
+# Plugin List:
+- [Auto MLM]
+- [Auto NMZ]
+- [Auto Scurrius]
+- [Auto Sandstone]
+- [Auto Combat]
+
+
+# Muy pronto:
+- Auto Pest Control
+- Auto Utility Spells
+- Auto Woodcutting Guild
+
+# Últimas actualizaciones:
+- Added Auto NMZ
+- Added Auto MLM
+- Added Auto Scurrius
+- Added Auto Sandstone
+- Added Auto Combat
+- Added Auto MTA
+- Added Auto WC Guild
+- Added Auto Mining Guild
+- Added Auto Shopper
+- 
 **Plugins Free**:
 - GG Guardians Of The Rift
 - GG Auto Tithe Farm
@@ -49,8 +73,6 @@ Plugins de automatización de RuneLite
 - xKylee's PrayAgainstPlayer
 - xKylee's LeftClickBlackjack
 - SpoonLite's Hotkey Walker Under
-
-
 
 # Instrucciones
 Simplemente haz doble clic en tu jar
