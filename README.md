@@ -53,7 +53,7 @@ Plugins de automatización de RuneLite
 
 
 # Instrucciones
-Simplemente haz doble clic en tu jar 
+Simplemente haz doble clic en tu jar
 
 El instalador de los plugins GG te lo indicará y luego haz clic en Instalar Sideloader.
 
