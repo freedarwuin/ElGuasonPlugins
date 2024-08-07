@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 import java.util.concurrent.ThreadLocalRandom;
 
 @PluginDescriptor(
-        name = "<html><font color=\"#FF9DF9\">[PP]</font> AutoChompy</html>",
+        name = "<html><font color=\"#FF9DF9\">[PP]</font> Auto Chompy</html>",
         description = "Auto Chompy Killer",
         enabledByDefault = false,
         tags = {"poly", "plugin"}

@@ -29,7 +29,7 @@ import java.util.Set;
 
 
 @PluginDescriptor(
-        name = "<html><font color=\"#FF9DF9\">[PP]</font> AutoTele</html>",
+        name = "<html><font color=\"#FF9DF9\">[PP]</font> Auto Tele</html>",
         description = "Auto Tele by EthanVann, maintained by Piggy Plugins",
         enabledByDefault = false,
         tags = {"ethan"}

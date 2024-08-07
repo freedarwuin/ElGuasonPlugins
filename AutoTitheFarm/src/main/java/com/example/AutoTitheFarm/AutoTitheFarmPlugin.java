@@ -44,7 +44,7 @@ import static com.example.EthanApiPlugin.EthanApiPlugin.stopPlugin;
 @PluginDependency(PacketUtilsPlugin.class)
 @PluginDependency(EthanApiPlugin.class)
 @PluginDescriptor(
-        name = "<html><font color=\"#00cbf2\">[L]</font> AutoTitheFarm<html>",
+        name = "<html><font color=\"#00cbf2\">[L]</font> Auto TitheFarm<html>",
         description = "Will do Tithe Farm for you",
         enabledByDefault = false,
         tags = {""})
