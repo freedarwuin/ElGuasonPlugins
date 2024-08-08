@@ -123,8 +123,16 @@ dependencies {
     implementation project(path: ':AutoMinnows')
     implementation project(path: ':AutoKarambwans')
     implementation project(path: ':K1Tick')
-    implementation project(path: ':AerialFishing')
-
+    implementation project(path: ':dancer')
+    implementation project(path: ':tarnslair')
+    implementation project(path: ':AutoRogues')
+    implementation project(path: ':AutoCakeThiever')
+    implementation project(path: ':AutoSandStone')
+    implementation project(path: ':VolcanicAsh')
+    implementation project(path: ':templetrekking')
+    implementation project(path: ':AutoWarriorsGuild')
+    implementation project(path: ':autosquirk')
+    implementation project(path: ':autocannonballer')
 }
 
 sourceSets {
