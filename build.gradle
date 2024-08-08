@@ -133,6 +133,7 @@ dependencies {
     implementation project(path: ':AutoWarriorsGuild')
     implementation project(path: ':autosquirk')
     implementation project(path: ':autocannonballer')
+    implementation project(path: ':AutoGemMiner')
 
 }
 
