@@ -136,6 +136,7 @@ dependencies {
     implementation project(path: ':AutoAlcher')
     implementation project(path: ':AutoGemMiner')
     implementation project(path: ':AerialFishing')
+    implementation project(path: ':AutoChopper')
 
 }
 
