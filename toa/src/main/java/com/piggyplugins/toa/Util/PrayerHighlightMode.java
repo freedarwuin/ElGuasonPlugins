@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Util;
+package com.piggyplugins.toa.Util;
 
 import lombok.AllArgsConstructor;
 

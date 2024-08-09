@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Util.Table;
+package com.piggyplugins.toa.Util.Table;
 
 public enum TableAlignment
 {

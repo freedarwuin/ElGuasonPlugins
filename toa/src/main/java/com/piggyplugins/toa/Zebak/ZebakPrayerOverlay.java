@@ -1,8 +1,8 @@
-package net.runelite.client.plugins.toa.Zebak;
+package com.piggyplugins.toa.Zebak;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Prayer.NextAttack;
-import net.runelite.client.plugins.toa.Prayer.PrayerOverlay;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Prayer.NextAttack;
+import com.piggyplugins.toa.Prayer.PrayerOverlay;
 import net.runelite.api.Client;
 
 import javax.inject.Inject;

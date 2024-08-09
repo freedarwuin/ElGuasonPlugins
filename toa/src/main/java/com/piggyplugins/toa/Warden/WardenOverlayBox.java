@@ -1,10 +1,10 @@
-package net.runelite.client.plugins.toa.Warden;
+package com.piggyplugins.toa.Warden;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.toa.RaidRoom;
-import net.runelite.client.plugins.toa.RaidStateTracker;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.RaidRoom;
+import com.piggyplugins.toa.RaidStateTracker;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayPriority;

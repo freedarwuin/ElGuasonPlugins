@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.NPC;
 import net.runelite.api.Prayer;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginManager;
+import com.piggyplugins.Plugin;
+import com.piggyplugins.PluginManager;
 
 @Singleton
 @Slf4j

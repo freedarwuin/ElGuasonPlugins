@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Baba;
+package com.piggyplugins.toa.Baba;
 
 import javax.inject.Inject;
 import lombok.Getter;

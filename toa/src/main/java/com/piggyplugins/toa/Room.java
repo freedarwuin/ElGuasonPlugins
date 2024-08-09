@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 
 import net.runelite.api.Client;

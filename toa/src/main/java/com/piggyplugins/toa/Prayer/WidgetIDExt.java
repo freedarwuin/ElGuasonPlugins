@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Prayer;
+package com.piggyplugins.toa.Prayer;
 
 public class WidgetIDExt
 {

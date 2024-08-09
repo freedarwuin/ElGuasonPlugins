@@ -1,9 +1,9 @@
-package net.runelite.client.plugins.toa.Akkha;
+package com.piggyplugins.toa.Akkha;
 
 import com.example.InteractionApi.PrayerInteraction;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Room;
-import net.runelite.client.plugins.toa.ToaPlugin;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
 
 import com.google.common.annotations.VisibleForTesting;
 import lombok.Getter;
@@ -14,8 +14,8 @@ import net.runelite.client.eventbus.Subscribe;
 
 import javax.inject.Inject;
 import java.util.LinkedHashSet;
-import net.runelite.client.plugins.toa.reflectMeth;
-import net.runelite.client.plugins.toa.reflectPackMeth;
+import com.piggyplugins.toa.reflectMeth;
+import com.piggyplugins.toa.reflectPackMeth;
 
 public class Akkha extends Room {
 

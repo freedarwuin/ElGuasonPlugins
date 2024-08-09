@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Prayer;
+package com.piggyplugins.toa.Prayer;
 
 import com.example.RuneBotApi.Prayer;
 import lombok.AccessLevel;

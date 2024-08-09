@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 import java.awt.Color;
 import net.runelite.client.config.Alpha;
@@ -6,7 +6,7 @@ import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
-import net.runelite.client.plugins.toa.config.FontStyle;
+import com.piggyplugins.toa.config.FontStyle;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,13 @@
-package net.runelite.client.plugins.toa.Warden;
+package com.piggyplugins.toa.Warden;
 
 import java.util.LinkedHashSet;
 
 import com.example.InteractionApi.PrayerInteraction;
 import net.runelite.api.*;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Prayer.NextAttack;
-import net.runelite.client.plugins.toa.Room;
-import net.runelite.client.plugins.toa.ToaPlugin;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Prayer.NextAttack;
+import com.piggyplugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import net.runelite.client.plugins.toa.reflectMeth;
+import com.piggyplugins.toa.reflectMeth;
 import com.example.Packets.MousePackets;
 import com.example.Packets.WidgetPackets;
 

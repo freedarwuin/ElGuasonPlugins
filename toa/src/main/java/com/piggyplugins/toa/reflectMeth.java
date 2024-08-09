@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import net.runelite.api.NPC;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.plugins.Plugin;
+import com.piggyplugins.Plugin;
 
 public interface reflectMeth
 {

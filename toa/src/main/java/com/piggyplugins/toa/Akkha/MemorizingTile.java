@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Akkha;
+package com.piggyplugins.toa.Akkha;
 
 import lombok.Getter;
 import lombok.Setter;

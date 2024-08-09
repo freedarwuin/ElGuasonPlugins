@@ -1,9 +1,9 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Util.Table.TableAlignment;
-import net.runelite.client.plugins.toa.Util.Table.TableComponent;
-import net.runelite.client.plugins.toa.Zebak.Zebak;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Util.Table.TableAlignment;
+import com.piggyplugins.toa.Util.Table.TableComponent;
+import com.piggyplugins.toa.Zebak.Zebak;
 import net.runelite.api.Client;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayPosition;

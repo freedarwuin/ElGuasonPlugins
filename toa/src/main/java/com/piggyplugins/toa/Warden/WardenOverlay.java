@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Warden;
+package com.piggyplugins.toa.Warden;
 
 import java.util.ArrayList;
 import lombok.extern.slf4j.Slf4j;
@@ -8,11 +8,11 @@ import net.runelite.api.Point;
 import net.runelite.api.Projectile;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.plugins.toa.Akkha.MemorizingTile;
-import net.runelite.client.plugins.toa.Baba.Baba;
-import net.runelite.client.plugins.toa.Kephri.KephriDangerTile;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.Akkha.MemorizingTile;
+import com.piggyplugins.toa.Baba.Baba;
+import com.piggyplugins.toa.Kephri.KephriDangerTile;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.api.GameObject;
 import net.runelite.api.NPC;
 import net.runelite.api.NPCComposition;

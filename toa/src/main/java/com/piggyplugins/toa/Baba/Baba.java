@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Baba;
+package com.piggyplugins.toa.Baba;
 
 import java.util.LinkedHashSet;
 import lombok.extern.slf4j.Slf4j;
@@ -6,11 +6,11 @@ import net.runelite.api.GraphicsObject;
 import net.runelite.api.NPC;
 import net.runelite.api.events.GraphicsObjectCreated;
 import net.runelite.api.events.NpcSpawned;
-import net.runelite.client.plugins.toa.Kephri.KephriDangerTile;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Het.HetOverlay;
-import net.runelite.client.plugins.toa.Room;
-import net.runelite.client.plugins.toa.ToaPlugin;
+import com.piggyplugins.toa.Kephri.KephriDangerTile;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Het.HetOverlay;
+import com.piggyplugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.runelite.api.Client;
@@ -21,7 +21,7 @@ import net.runelite.client.eventbus.Subscribe;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import net.runelite.client.plugins.toa.reflectMeth;
+import com.piggyplugins.toa.reflectMeth;
 
 @Slf4j
 public class Baba extends Room {

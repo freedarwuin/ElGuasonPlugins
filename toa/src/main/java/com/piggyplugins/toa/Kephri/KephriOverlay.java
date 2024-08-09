@@ -1,12 +1,12 @@
-package net.runelite.client.plugins.toa.Kephri;
+package com.piggyplugins.toa.Kephri;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Akkha.Akkha;
-import net.runelite.client.plugins.toa.RoomOverlay;
-import net.runelite.client.plugins.toa.Warden.WardenDangerTile;
-import net.runelite.client.plugins.toa.Zebak.Zebak;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Akkha.Akkha;
+import com.piggyplugins.toa.RoomOverlay;
+import com.piggyplugins.toa.Warden.WardenDangerTile;
+import com.piggyplugins.toa.Zebak.Zebak;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;

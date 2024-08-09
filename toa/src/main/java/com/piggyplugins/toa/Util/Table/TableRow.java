@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Util.Table;
+package com.piggyplugins.toa.Util.Table;
 
 import java.awt.Color;
 import java.util.Collections;

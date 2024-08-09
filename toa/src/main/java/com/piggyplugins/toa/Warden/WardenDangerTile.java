@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Warden;
+package com.piggyplugins.toa.Warden;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;

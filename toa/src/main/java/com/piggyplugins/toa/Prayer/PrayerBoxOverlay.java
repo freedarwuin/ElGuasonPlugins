@@ -1,6 +1,6 @@
-package net.runelite.client.plugins.toa.Prayer;
+package com.piggyplugins.toa.Prayer;
 
-import net.runelite.client.plugins.toa.ToaConfig;
+import com.piggyplugins.toa.ToaConfig;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.runelite.api.Client;

@@ -1,7 +1,7 @@
-package net.runelite.client.plugins.toa.Prayer;
+package com.piggyplugins.toa.Prayer;
 
 
-import net.runelite.client.plugins.toa.Prayer.WidgetIDExt;
+import com.piggyplugins.toa.Prayer.WidgetIDExt;
 
 public enum WidgetInfoExt
 {

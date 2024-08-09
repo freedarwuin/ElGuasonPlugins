@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-import net.runelite.client.plugins.toa.Util.GUIOverlayUtil;
+import com.piggyplugins.toa.Util.GUIOverlayUtil;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;

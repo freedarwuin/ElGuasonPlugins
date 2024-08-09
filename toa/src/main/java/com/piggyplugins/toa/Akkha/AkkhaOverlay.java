@@ -1,8 +1,8 @@
-package net.runelite.client.plugins.toa.Akkha;
+package com.piggyplugins.toa.Akkha;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Util.AttackStyle;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Util.AttackStyle;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;

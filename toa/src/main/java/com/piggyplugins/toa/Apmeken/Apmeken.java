@@ -1,10 +1,10 @@
-package net.runelite.client.plugins.toa.Apmeken;
+package com.piggyplugins.toa.Apmeken;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ScriptID;
-import net.runelite.client.plugins.toa.ToaPlugin;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Room;
 import lombok.AccessLevel;
 import lombok.Getter;
 import net.runelite.api.Client;
@@ -15,7 +15,7 @@ import net.runelite.client.eventbus.Subscribe;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import net.runelite.client.plugins.toa.reflectMeth;
+import com.piggyplugins.toa.reflectMeth;
 
 @Slf4j
 public class Apmeken extends Room {

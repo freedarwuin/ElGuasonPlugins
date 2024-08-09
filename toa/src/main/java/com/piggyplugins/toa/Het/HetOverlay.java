@@ -1,7 +1,7 @@
-package net.runelite.client.plugins.toa.Het;
+package com.piggyplugins.toa.Het;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.client.ui.overlay.OverlayLayer;

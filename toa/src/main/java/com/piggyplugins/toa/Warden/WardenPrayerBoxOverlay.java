@@ -1,14 +1,14 @@
-package net.runelite.client.plugins.toa.Warden;
+package com.piggyplugins.toa.Warden;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Prayer.NextAttack;
-import net.runelite.client.plugins.toa.Prayer.PrayerBoxOverlay;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Prayer.NextAttack;
+import com.piggyplugins.toa.Prayer.PrayerBoxOverlay;
 import net.runelite.api.Client;
 import net.runelite.client.game.SpriteManager;
 
 import javax.inject.Inject;
 import java.util.Queue;
-import net.runelite.client.plugins.toa.Warden.Warden;
+import com.piggyplugins.toa.Warden.Warden;
 
 public class WardenPrayerBoxOverlay extends PrayerBoxOverlay
 {

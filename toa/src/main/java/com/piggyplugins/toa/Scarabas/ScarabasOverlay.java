@@ -1,10 +1,10 @@
-package net.runelite.client.plugins.toa.Scarabas;
+package com.piggyplugins.toa.Scarabas;
 
 import net.runelite.api.Point;
-import net.runelite.client.plugins.toa.Kephri.KephriDangerTile;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Kephri.Kephri;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.Kephri.KephriDangerTile;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Kephri.Kephri;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.api.GraphicsObject;
 import net.runelite.api.GroundObject;
 import net.runelite.api.Perspective;

@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa.Kephri;
+package com.piggyplugins.toa.Kephri;
 
 import javax.inject.Inject;
 import lombok.Getter;

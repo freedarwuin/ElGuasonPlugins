@@ -1,14 +1,14 @@
-package net.runelite.client.plugins.toa.Kephri;
+package com.piggyplugins.toa.Kephri;
 
 import java.util.LinkedHashSet;
 import net.runelite.api.GraphicsObject;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GraphicsObjectCreated;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Het.HetOverlay;
-import net.runelite.client.plugins.toa.Prayer.NextAttack;
-import net.runelite.client.plugins.toa.Room;
-import net.runelite.client.plugins.toa.ToaPlugin;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Het.HetOverlay;
+import com.piggyplugins.toa.Prayer.NextAttack;
+import com.piggyplugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
 import com.google.common.annotations.VisibleForTesting;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,8 +24,8 @@ import net.runelite.client.eventbus.Subscribe;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import net.runelite.client.plugins.toa.Warden.WardenDangerTile;
-import net.runelite.client.plugins.toa.reflectMeth;
+import com.piggyplugins.toa.Warden.WardenDangerTile;
+import com.piggyplugins.toa.reflectMeth;
 
 @Slf4j
 public class Kephri extends Room {

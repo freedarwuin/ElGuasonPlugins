@@ -1,14 +1,14 @@
-package net.runelite.client.plugins.toa.Baba;
+package com.piggyplugins.toa.Baba;
 
 import net.runelite.api.Point;
-import net.runelite.client.plugins.toa.Kephri.KephriDangerTile;
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Akkha.Akkha;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.Kephri.KephriDangerTile;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Akkha.Akkha;
+import com.piggyplugins.toa.RoomOverlay;
 
 import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.client.plugins.toa.Warden.WardenDangerTile;
+import com.piggyplugins.toa.Warden.WardenDangerTile;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayUtil;
 import net.runelite.client.ui.overlay.outline.ModelOutlineRenderer;

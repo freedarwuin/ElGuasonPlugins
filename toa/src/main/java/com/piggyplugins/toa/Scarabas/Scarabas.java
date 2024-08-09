@@ -1,9 +1,9 @@
-package net.runelite.client.plugins.toa.Scarabas;
+package com.piggyplugins.toa.Scarabas;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.Kephri.KephriOverlay;
-import net.runelite.client.plugins.toa.Room;
-import net.runelite.client.plugins.toa.ToaPlugin;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.Kephri.KephriOverlay;
+import com.piggyplugins.toa.Room;
+import com.piggyplugins.toa.ToaPlugin;
 import com.google.common.collect.ImmutableMap;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import net.runelite.client.plugins.toa.reflectMeth;
+import com.piggyplugins.toa.reflectMeth;
 
 public class Scarabas extends Room {
     @Inject

@@ -1,12 +1,12 @@
-package net.runelite.client.plugins.toa.Prayer;
+package com.piggyplugins.toa.Prayer;
 
-import net.runelite.client.plugins.toa.ToaConfig;
+import com.piggyplugins.toa.ToaConfig;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
-import net.runelite.client.plugins.toa.Prayer.WidgetInfoExt;
+import com.piggyplugins.toa.Prayer.WidgetInfoExt;
 import net.runelite.client.ui.overlay.*;
 
 import javax.inject.Inject;

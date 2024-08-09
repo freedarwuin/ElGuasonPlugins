@@ -1,7 +1,7 @@
-package net.runelite.client.plugins.toa.Zebak;
+package com.piggyplugins.toa.Zebak;
 
-import net.runelite.client.plugins.toa.ToaConfig;
-import net.runelite.client.plugins.toa.RoomOverlay;
+import com.piggyplugins.toa.ToaConfig;
+import com.piggyplugins.toa.RoomOverlay;
 import net.runelite.api.GameObject;
 import net.runelite.api.NPC;
 import net.runelite.api.NPCComposition;

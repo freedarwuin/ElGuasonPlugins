@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.toa;
+package com.piggyplugins.toa;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
