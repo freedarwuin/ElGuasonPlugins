@@ -138,7 +138,9 @@ dependencies {
     implementation project(path: ':AerialFishing')
     implementation project(path: ':AutoChopper')
     implementation project(path: ':AutoPohPrayer')
-    //implementation project(path: ':toa')
+    implementation project(path: ':renderstop')
+    implementation project(path: ':socket')
+
 
 }
 
