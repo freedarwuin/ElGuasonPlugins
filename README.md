@@ -93,5 +93,3 @@ Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **ext
 [![FAQ](https://img.shields.io/badge/FAQ-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1253908554616934521)
 
 [![Donate at ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/0hutch)
-
-y much sdasdasdsadasds
