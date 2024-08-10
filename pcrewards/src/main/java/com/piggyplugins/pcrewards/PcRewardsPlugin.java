@@ -44,7 +44,7 @@ import com.piggyplugins.pcrewards.PcRewardsDrawWidget;
 @Slf4j
 @PluginDescriptor(
 		name = "PC Rewards",
-		description = "Customize the PC Rewards screen to prevent unwanted spending",
+		description = "Personaliza la pantalla de Recompensas de PC para evitar gastos no deseados",
 		tags = {"pest control", "pc", "minigame", "hide", "points"}
 )
 public class PcRewardsPlugin extends Plugin
