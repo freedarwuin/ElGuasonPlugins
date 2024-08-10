@@ -8,7 +8,7 @@ Plugins de automatización de RuneLite
 
 
 
-# Versión 3.3
+# Versión 3.4
 ***Actualizado el 4 de julio de 2024 a las 7:32 a. m. EST***
 
 # Plugin List:
