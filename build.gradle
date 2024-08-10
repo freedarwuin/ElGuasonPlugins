@@ -140,6 +140,7 @@ dependencies {
     implementation project(path: ':AutoPohPrayer')
     implementation project(path: ':renderstop')
     implementation project(path: ':socket')
+    implementation project(path: ':hallowedsepulchre')
 
 
 }
