@@ -94,4 +94,4 @@ Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **ext
 
 [![Donate at ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/0hutch)
 
-y 
+y much sdasdasdsadasds
