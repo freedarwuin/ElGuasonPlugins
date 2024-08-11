@@ -19,8 +19,8 @@ import java.util.Objects;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Friend's House",
-        description = "Quickly enter your friend's house with a single click",
+        name = "<html><font color=#86C43F>[GP]</font> Friend's House</html>",
+        description = "Entra rápidamente a la casa de tu amigo con un solo clic",
         tags = {"friend", "friends", "house", "poh", "portal", "name"}
 )
 public class FriendsHousePlugin extends Plugin {
