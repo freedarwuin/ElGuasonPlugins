@@ -142,6 +142,7 @@ dependencies {
     implementation project(path: ':socket')
     implementation project(path: ':hallowedsepulchre')
     implementation project(path: ':pcrewards')
+    implementation project(path: 'ewyboy')
 
 
 }
@@ -171,10 +172,10 @@ group = 'com.piggyplugins'
 //version = 'wuendis .p' // prueba
 //version = 'Miguel guzman' // TRABAJADOR
 //version = 'Daniel Romero'
-version = 'freedarwuin'
+//version = 'freedarwuin'
 //version= 'bomdiggidy '
 //version = 'louisenyel_00128'
-//version = 'Github'
+version = 'Github'
 sourceCompatibility = "11"
 
 task FatJar(type: Jar) {
