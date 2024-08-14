@@ -82,14 +82,3 @@ El instalador de los plugins GG te lo indicará y luego haz clic en Instalar Sid
 Si ya tienes GG Plugins/EthanInstaller en tu RuneLite y el instalador GG aparece como instalado, ve a .runelite y arrastra los complementos a **externalplugins** o **sideloaded-plugins**. Asegúrate de que todas las versiones obsoletas se hayan eliminado de tu cliente.
 
 Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **externalplugins** o tienes cualquier otro problema, puedes usar uno de los enlaces que aparecen a continuación.
-
-# Enlaces
-[![Auto ToB](https://img.shields.io/badge/Auto%20ToB-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1188431292115722270)
-
-[![Download Guide](https://img.shields.io/badge/Download%20Guide-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1125186871224447057)
-
-[![Free Plugins Help](https://img.shields.io/badge/Free%20Plugins%20Help-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1124636010349871134)
-
-[![FAQ](https://img.shields.io/badge/FAQ-FF0000?style=for-the-badge)](https://discord.com/channels/1124614852187533322/1253908554616934521)
-
-[![Donate at ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/0hutch)

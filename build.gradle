@@ -144,7 +144,6 @@ dependencies {
     implementation project(path: ':pcrewards')
     implementation project(path: 'ewyboy')
     implementation project(path: 'pvptools')
-
 }
 
 sourceSets {
