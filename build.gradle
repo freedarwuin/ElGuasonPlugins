@@ -34,7 +34,7 @@ dependencies {
     //implementation project(path: ':PiggyUtils')
 
 
-    /*implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
 
     implementation project(path: ':SixHourLog')
     implementation project(path: ':LoginModified')
@@ -72,10 +72,10 @@ dependencies {
     implementation project(path: ':BetterProfiles')
     implementation project(path: ':PathingTesting')
     implementation project(path: ':PiggyAutoCombat')
-    implementation project(path: ':AutoChop')*/
+    implementation project(path: ':AutoChop')
 
     // Plugins Elite ff4d00
-    implementation project(path: ':Discord-Level-Notifications')
+    /*implementation project(path: ':Discord-Level-Notifications')
     implementation project(path: ':AutoWintertodt')
     implementation project(path: ':AutoMLM')
     implementation project(path: ':AutoCrafting')
@@ -143,7 +143,7 @@ dependencies {
     implementation project(path: ':hallowedsepulchre')
     implementation project(path: ':pcrewards')
     implementation project(path: 'ewyboy')
-    implementation project(path: 'pvptools')
+    implementation project(path: 'pvptools')*/
 }
 
 sourceSets {
@@ -158,7 +158,7 @@ sourceSets {
 }
 
 group = 'com.piggyplugins'
-//version = 'free'
+version = 'free'
 //version = 'CMS MrTunTun'
 //version = 'Drack2000'
 //version = 'Dsnayker'
@@ -171,7 +171,7 @@ group = 'com.piggyplugins'
 //version = 'wuendis .p' // prueba
 //version = 'Miguel guzman' // TRABAJADOR
 //version = 'Daniel Romero'
-version = 'freedarwuin'
+//version = 'freedarwuin'
 //version= 'bomdiggidy '
 //version = 'louisenyel_00128'
 //version = 'Github'
