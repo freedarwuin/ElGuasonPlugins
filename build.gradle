@@ -38,7 +38,7 @@ dependencies {
 
     implementation project(path: ':SixHourLog')
     implementation project(path: ':LoginModified')
-    //implementation project(path: ':discord-rare-drop-notificater')
+    implementation project(path: ':discord-rare-drop-notificater')
     implementation project(path: ':DinkPlugin')
     implementation project(path: ':DialogueContinuer')
     //Plugins Free
@@ -84,7 +84,7 @@ dependencies {
     implementation project(path: ':AutoWhispererPrayers')
     implementation project(path: ':RSNHider')
     implementation project(path: ':ScurriusSpines')
-    implementation project(path: ':AutoNMZ')
+    implementation project(path: ':AutoNMZ') //NMZ
     implementation project(path: ':GreenDrags')
     implementation project(path: ':BobTheBuilder') //Construccion
     implementation project(path: ':CluePuzzleSolver')
@@ -175,6 +175,7 @@ version = 'free'
 //version= 'bomdiggidy '
 //version = 'louisenyel_00128'
 //version = 'Github'
+//version = 'JoseVercce'
 sourceCompatibility = "11"
 
 task FatJar(type: Jar) {
