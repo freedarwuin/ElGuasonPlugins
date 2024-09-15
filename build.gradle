@@ -38,7 +38,7 @@ dependencies {
 
     implementation project(path: ':SixHourLog')
     implementation project(path: ':LoginModified')
-    implementation project(path: ':discord-rare-drop-notificater')
+    //implementation project(path: ':discord-rare-drop-notificater')
     implementation project(path: ':DinkPlugin')
     implementation project(path: ':DialogueContinuer')
     //Plugins Free
