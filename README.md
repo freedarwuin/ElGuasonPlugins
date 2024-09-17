@@ -82,4 +82,3 @@ El instalador de los plugins GG te lo indicará y luego haz clic en Instalar Sid
 Si ya tienes GG Plugins/EthanInstaller en tu RuneLite y el instalador GG aparece como instalado, ve a .runelite y arrastra los complementos a **externalplugins** o **sideloaded-plugins**. Asegúrate de que todas las versiones obsoletas se hayan eliminado de tu cliente.
 
 Si aparece como instalado y no tienes una carpeta **sideloaded-plugins** o **externalplugins** o tienes cualquier otro problema, puedes usar uno de los enlaces que aparecen a continuación.
-hoy
