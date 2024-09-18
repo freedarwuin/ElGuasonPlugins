@@ -1,6 +1,5 @@
 package com.example.PacketUtils;
 
-import com.google.archivepatcher.applier.FileByFileV1DeltaApplier;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import lombok.SneakyThrows;
@@ -16,7 +15,6 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.rs.ClientLoader;
 import org.benf.cfr.reader.Main;
 
 import javax.inject.Inject;
@@ -50,7 +48,7 @@ public class PacketUtilsPlugin extends Plugin {
     static Client staticClient;
     public static Method addNodeMethod;
     public static boolean usingClientAddNode = false;
-    public static final int CLIENT_REV = 223;
+    public static final int CLIENT_REV = 225;
     private static String loadedConfigName = "";
     @Inject
     private PluginManager pluginManager;
@@ -186,42 +184,13 @@ public class PacketUtilsPlugin extends Plugin {
             log.info("addNodeMethod: " + addNodeMethod);
             return;
         }
-        String doActionClassName = "";
-        String doActionMethodName = "";
-        Field classes = ClassLoader.class.getDeclaredField("classes");
-        classes.setAccessible(true);
-        ClassLoader classLoader = client.getClass().getClassLoader();
-        Vector<Class<?>> classesVector = (Vector<Class<?>>) classes.get(classLoader);
-        Class<?>[] params = new Class[]{int.class, int.class, int.class, int.class, int.class, int.class, String.class, String.class, int.class, int.class};
-        for (int i = 0; i < classesVector.size(); i++) {
-            try {
-                //log.inf("class: " + classesVector.get(i));
-                if (classesVector.get(i).getName().equals("ac")) {
-                    //log.inf("skipping ac");
-                    continue;
-                }
-                try {
-                    for (int i1 = 0; i1 < classesVector.get(i).getDeclaredMethods().length; i1++) {
-                        if (!Arrays.equals(Arrays.copyOfRange(classesVector.get(i).getDeclaredMethods()[i1].getParameterTypes(), 0, 10), params)) {
-                            continue;
-                        }
-                        doActionClassName = classesVector.get(i).getSimpleName();
-                        doActionMethodName = classesVector.get(i).getDeclaredMethods()[i1].getName();
-                    }
-                } catch (NoClassDefFoundError error) {
-                    //log.inf("No class def found but continue");
-                    continue;
-                }
-            } catch (Exception e) {
-                //log.inf("exception");
-            }
-        }
+        String doActionClassName = "qt";
+        String doActionMethodName = "mo";
         System.out.print("finished");
         final String doActionFinalClassName = doActionClassName;
         final String doActionFinalMethodName = doActionMethodName;
         System.out.println(doActionFinalClassName);
         System.out.println(doActionFinalMethodName);
-        classes.setAccessible(false);
         URL rlConfigURL = new URL("https://static.runelite.net/jav_config.ws");
         if (!codeSource.toFile().isDirectory()) {
             Files.createDirectory(codeSource);
@@ -247,18 +216,15 @@ public class PacketUtilsPlugin extends Plugin {
         if ((length > 0 && Integer.parseInt(versionSplits[0]) > 1 || (length > 1) && (Integer.parseInt(versionSplits[1]) > 10) )|| (length > 2 && Integer.parseInt(versionSplits[2]) > 34)) {
             String url = "https://repo.runelite.net/net/runelite/injected-client/" + version + "/injected-client-" + version + ".jar";
             URL injectedURL = new URL(url);
-            log.info("Downloading vanilla client from " + injectedURL);
+            log.info("Downloading injected client from " + injectedURL);
             try (InputStream clientStream = injectedURL.openStream()) {
                 Files.copy(clientStream, patchedOutputPath, StandardCopyOption.REPLACE_EXISTING);
             }
         } else {
-            OutputStream patchedOutputStream = Files.newOutputStream(patchedOutputPath);
-            InputStream patch = ClientLoader.class.getResourceAsStream("/client.patch");
-            new FileByFileV1DeltaApplier().applyDelta(vanilla, patch, patchedOutputStream);
-            patch.close();
-            patchedOutputStream.flush();
-            patchedOutputStream.close();
+            System.out.println("unsupported rl version");
+            throw new UnsupportedOperationException("unsupported rl version");
         }
+        System.out.println(doActionFinalClassName);
         try (JarFile patchedJar = new JarFile(patchedOutputPath.toFile())) {
             patchedJar.entries().asIterator().forEachRemaining(jarEntry -> {
                 System.out.println("jar entry: " + jarEntry.getName());
@@ -295,10 +261,8 @@ public class PacketUtilsPlugin extends Plugin {
             }
         }
         reader.close();
-        for (String methodCall : methodCalls) {
-            System.out.println(methodCall);
-        }
         String mostUsedMethod = methodCalls.stream()
+                .filter(str -> !str.contains("** while"))
                 .collect(Collectors.groupingBy(str -> str, Collectors.counting()))
                 .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .findFirst().get().getKey();

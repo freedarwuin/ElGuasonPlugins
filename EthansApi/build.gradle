@@ -20,16 +20,16 @@ sourceSets {
     }
 }
 
-group 'com.example'
+group 'com.ozplugins'
 version ''
 
 test {
     useJUnitPlatform()
 }
 
-task PiggyJar(type: Jar) {
+task BuildJars(type: Jar) {
     manifest {
-        attributes 'Main-Class': 'com.example.Main'
+        attributes 'Main-Class': 'com.ozplugins.Main'
     }
     baseName = 'ethan-api'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE

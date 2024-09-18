@@ -1,4 +1,5 @@
-package net.runelite.client.plugins.AutoCakeThiever;
+package com.piggyplugins.AutoCakeThiever;
+//package net.runelite.client.plugins.AutoCakeThiever;
 
 import com.google.inject.Inject;
 import net.runelite.client.ui.overlay.OverlayPanel;

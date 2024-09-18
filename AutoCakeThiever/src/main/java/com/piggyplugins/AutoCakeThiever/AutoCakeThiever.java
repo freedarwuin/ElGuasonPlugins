@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.AutoCakeThiever;
+package com.piggyplugins.AutoCakeThiever;
 
 import com.example.EthanApiPlugin.Collections.Bank;
 import com.example.EthanApiPlugin.Collections.Inventory;
@@ -40,12 +40,12 @@ public class AutoCakeThiever extends Plugin {
     @Inject
     private OverlayManager overlayManager;
     @Inject
-    private AutoCakeThieverOverlay overlay;
+    private com.piggyplugins.AutoCakeThiever.AutoCakeThieverOverlay overlay;
     @Inject
-    AutoCakeThieverConfig config;
+    net.runelite.client.plugins.AutoCakeThiever.AutoCakeThieverConfig config;
     private Instant startTime;
     public int timeout;
-    public State currentState = State.STARTING;
+    public net.runelite.client.plugins.AutoCakeThiever.State currentState = net.runelite.client.plugins.AutoCakeThiever.State.STARTING;
     boolean startup;
     boolean shouldThieve = false;
     WorldPoint BankTile = new WorldPoint(2655, 3283, 0);
@@ -59,7 +59,7 @@ public class AutoCakeThiever extends Plugin {
         overlayManager.add(overlay);
         startTime = Instant.now();
         startup = true;
-        currentState = State.IDLE;
+        currentState = net.runelite.client.plugins.AutoCakeThiever.State.IDLE;
     }
 
     @Override
@@ -68,10 +68,10 @@ public class AutoCakeThiever extends Plugin {
         startTime = null;
         timeout = 0;
         startup = false;
-        currentState = State.IDLE;
+        currentState = net.runelite.client.plugins.AutoCakeThiever.State.IDLE;
     }
 
-    public State getCurrentState() {
+    public net.runelite.client.plugins.AutoCakeThiever.State getCurrentState() {
         return currentState;
     }
 
@@ -80,8 +80,8 @@ public class AutoCakeThiever extends Plugin {
     }
 
     @Provides
-    AutoCakeThieverConfig provideConfig(ConfigManager configManager) {
-        return configManager.getConfig(AutoCakeThieverConfig.class);
+    net.runelite.client.plugins.AutoCakeThiever.AutoCakeThieverConfig provideConfig(ConfigManager configManager) {
+        return configManager.getConfig(net.runelite.client.plugins.AutoCakeThiever.AutoCakeThieverConfig.class);
     }
 
     @Subscribe
@@ -131,23 +131,23 @@ public class AutoCakeThiever extends Plugin {
 
     private void handleState() {
         if (startup) {
-            currentState = State.STARTING;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.STARTING;
             startup = false;
         }
         if (isInArdougneMarketArea() && !isAtStallTile())
-            currentState = State.WALKING_TO_STALL;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.WALKING_TO_STALL;
         if (!isInventoryFull() && isAtStallTile() && shouldThieve)
-            currentState = State.THIEVING_CAKE;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.THIEVING_CAKE;
         if (shouldDropItems())
-            currentState = State.DROPPING_REST;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.DROPPING_REST;
         if (Inventory.full())
-            currentState = State.WALKING_TO_BANK;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.WALKING_TO_BANK;
         if (isAtBank() && isInventoryFull())
-            currentState = State.OPENING_BANK;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.OPENING_BANK;
         if (Bank.isOpen() && isInventoryFull())
-            currentState = State.DEPOSIT_CAKES;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.DEPOSIT_CAKES;
         if (isAtBank() && Bank.isOpen() && inventoryIsEmpty())
-            currentState = State.CLOSE_BANK;
+            currentState = net.runelite.client.plugins.AutoCakeThiever.State.CLOSE_BANK;
     }
 
     public void thieveCakes() {

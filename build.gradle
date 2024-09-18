@@ -34,7 +34,7 @@ dependencies {
     //implementation project(path: ':PiggyUtils')
 
 
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
+    /*implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
 
     implementation project(path: ':SixHourLog')
     implementation project(path: ':LoginModified')
@@ -72,10 +72,10 @@ dependencies {
     implementation project(path: ':BetterProfiles')
     implementation project(path: ':PathingTesting')
     implementation project(path: ':PiggyAutoCombat')
-    implementation project(path: ':AutoChop')
+    implementation project(path: ':AutoChop')*/
 
     // Plugins Elite ff4d00
-    /*implementation project(path: ':Discord-Level-Notifications')
+    implementation project(path: ':Discord-Level-Notifications')
     implementation project(path: ':AutoWintertodt')
     implementation project(path: ':AutoMLM')
     implementation project(path: ':AutoCrafting')
@@ -102,7 +102,7 @@ dependencies {
     implementation project(path: ':JadAutoPrayers')
     implementation project(path: ':GauntletFlicker')
     implementation project(path: ':AutoTele')
-    implementation project(path: ':LavaRunecrafter')
+    //implementation project(path: ':LavaRunecrafter') //Temporalmente
     implementation project(path: ':VardorvisHelper')
     implementation project(path: ':NightmareHelper')
     implementation project(path: ':HideCast')
@@ -126,7 +126,7 @@ dependencies {
     implementation project(path: ':dancer')
     implementation project(path: ':tarnslair')
     implementation project(path: ':AutoRogues')
-    implementation project(path: ':AutoCakeThiever')
+    //implementation project(path: ':AutoCakeThiever')
     implementation project(path: ':AutoSandStone')
     implementation project(path: ':VolcanicAsh')
     implementation project(path: ':templetrekking')
@@ -143,7 +143,24 @@ dependencies {
     implementation project(path: ':hallowedsepulchre')
     implementation project(path: ':pcrewards')
     implementation project(path: 'ewyboy')
-    implementation project(path: 'pvptools')*/
+    implementation project(path: 'pvptools')
+    //Incluidos
+    implementation project(path: 'BobTheBaller')
+    implementation project(path: 'BobTheBlower')
+    implementation project(path: 'BobTheChef')
+    implementation project(path: 'BobTheCombatBoy')
+    implementation project(path: 'BobTheCutter')
+    implementation project(path: 'BobTheFarmer')
+    implementation project(path: 'BobTheHunter')
+    implementation project(path: 'BobTheLazyNMZ')
+    implementation project(path: 'BobTheSkiller')
+    implementation project(path: 'BobTheTemplate')
+    implementation project(path: 'BobTheThief')
+    implementation project(path: 'PolyHunter')
+    implementation project(path: 'AutoLoot')
+    implementation project(path: 'PiggyLoader')
+    implementation project(path: 'AutoVardorvis')
+
 }
 
 sourceSets {
@@ -158,7 +175,7 @@ sourceSets {
 }
 
 group = 'com.piggyplugins'
-version = 'free'
+//version = 'free'
 //version = 'CMS MrTunTun'
 //version = 'Drack2000'
 //version = 'Dsnayker'
@@ -171,7 +188,7 @@ version = 'free'
 //version = 'wuendis .p' // prueba
 //version = 'Miguel guzman' // TRABAJADOR
 //version = 'Daniel Romero'
-//version = 'freedarwuin'
+version = 'freedarwuin'
 //version= 'bomdiggidy '
 //version = 'louisenyel_00128'
 //version = 'Github'
